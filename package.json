@@ -1,0 +1,28 @@
+{
+  "name": "heroku-build",
+  "version": "0.0.1",
+  "description": "Heroku CLI plugin to build and release to an app",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/heroku-build.git"
+  },
+  "keywords": [
+    "heroku-plugin"
+  ],
+  "author": "Michael Friis (@friism)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heroku/heroku-build/issues"
+  },
+  "homepage": "https://github.com/heroku/heroku-build",
+  "dependencies": {
+    "archiver": "^0.14.3",
+    "heroku-client": "^1.9.1",
+    "node-uuid": "^1.4.2",
+    "request": "^2.53.0"
+  },
+  "devDependencies": {
+    "jshint": "*"
+  }
+}

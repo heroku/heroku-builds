@@ -1,0 +1,3 @@
+.DS_Store
+.jshint*
+/node_modules/
