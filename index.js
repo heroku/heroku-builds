@@ -4,6 +4,6 @@ exports.topics = [{
 }];
 
 exports.commands = [
-  require('./lib/commands/build')
+    require('./lib/commands/create'),
     require('./lib/commands/index')
 ];
