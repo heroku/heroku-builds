@@ -1,8 +1,9 @@
 exports.topics = [{
-  name: 'build',
-  description: 'tar up local dir and build and release to Heroku app'
+  name: 'builds',
+  description: 'manage builds'
 }];
 
 exports.commands = [
   require('./lib/commands/build')
+    require('./lib/commands/index')
 ];
