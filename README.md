@@ -12,7 +12,7 @@ Heroku CLI plugin to list and create builds for Heroku apps.
 
     heroku builds -a example-app
 
-Lists 10 most recently created apps for `example-app`
+Lists 10 most recently created builds for `example-app`
 
 ### Create build from local dir
 
