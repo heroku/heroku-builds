@@ -2,7 +2,9 @@
 
 Heroku CLI plugin to list and create builds for Heroku apps.
 
-# Installation
+## Use
+
+### Installation
 
     heroku plugins:install heroku-builds
 
@@ -30,11 +32,11 @@ If you pass a `--source-url` argument to the `create` command, a build will be c
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
 
-# Contributing
+## Contributing
 
 Contributions to the plugin are welcome. Report bugs and suggestions using GitHub Issues on the repository.
 
-# FAQ
+## FAQ
 
 ### How come archive -> build upload is not streamed?
 
