@@ -32,7 +32,7 @@ As above, build output is streamed to `stderr` and an optional `--version` argum
 
 # Contributing
 
-Contributions to the plugin are welcome. Report bugs and suggestions using GitHub Issues on this repository.
+Contributions to the plugin are welcome. Report bugs and suggestions using GitHub Issues on the repository.
 
 # FAQ
 
