@@ -1,5 +1,5 @@
 {
-  "name": "heroku-build",
+  "name": "heroku-builds",
   "version": "0.0.1",
   "description": "Heroku CLI plugin to build and release to an app",
   "main": "index.js",
