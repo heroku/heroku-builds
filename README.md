@@ -28,7 +28,7 @@ You can pass an optional `--version` argument in lieu of a git commit messages. 
 
 If you pass a `--source-url` argument to the `create` command, a build will be created from the contents of a tarball found at the URL. The current working directory contents is not used. Example:
 
-    builds:create --source-url https://github.com/heroku/node-js-sample/archive/master.tar.gz -a example-app
+    heroku builds:create --source-url https://github.com/heroku/node-js-sample/archive/master.tar.gz -a example-app
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
 
