@@ -18,7 +18,7 @@ Lists 10 most recently created builds for `example-app`
 
     heroku builds:create -a example-app
 
-Creates a `.tar.gz` archive from the current working directory, uploads the archive to Heroku and creates a build from the contents of the archive. Build output is streamed to `stderr`. Hitting ctrl+c will not cancel the build and release. Currently the entire contents of the directory is added to the archive, including `.git`. Items matching `.gitignore` or not excluded.
+Creates a `.tar.gz` archive from the current working directory, uploads the archive to Heroku and creates a build from the contents of the archive. Build output is streamed to `stderr`. Hitting ctrl+c will not cancel the build and release. The `.git` directory (if present) is excluded from the upload, as are items matching entries in the `.gitignore` file (if present).
 
 You can pass an optional `--version` argument in lieu of a git commit messages. Example:
 
