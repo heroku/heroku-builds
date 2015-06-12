@@ -1,9 +1,9 @@
-exports.topics = [{
+exports.topic = {
   name: 'builds',
   description: 'manage builds'
-}];
+};
 
 exports.commands = [
-    require('./lib/commands/create'),
-    require('./lib/commands/index')
+  require('./commands/builds/create'),
+  require('./commands/builds/index')
 ];

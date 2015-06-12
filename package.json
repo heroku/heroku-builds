@@ -19,7 +19,7 @@
   "dependencies": {
     "archiver": "^0.14.3",
     "columnify": "^1.4.1",
-    "heroku-client": "^1.9.1",
+    "heroku-cli-util": "^5.0.2",
     "ignore": "^2.2.15",
     "node-uuid": "^1.4.2",
     "request": "^2.53.0"
