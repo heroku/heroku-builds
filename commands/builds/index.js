@@ -1,6 +1,6 @@
 'use strict';
 
-let Heroku = require('heroku-client');
+let cli       = require('heroku-cli-util');
 let columnify = require('columnify');
 
 module.exports = {
@@ -9,10 +9,8 @@ module.exports = {
   needsApp: true,
   description: 'list builds',
   help: 'List builds for a Heroku app',
-  run: function (context) {
-    let heroku = new Heroku({ token: context.auth.password });
-
-    heroku.request({
+  run: cli.command(function (context, heroku) {
+    return heroku.request({
        path: `/apps/${context.app}/builds`,
        method: 'GET',
        headers: {
@@ -35,5 +33,5 @@ module.exports = {
       });
       console.log(columns);
     });
-  }
+  })
 };

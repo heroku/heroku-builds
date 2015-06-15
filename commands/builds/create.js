@@ -1,8 +1,8 @@
 'use strict';
 
+let cli = require('heroku-cli-util');
 let archiver = require('archiver');
 let fs = require('fs');
-let Heroku = require('heroku-client');
 let ignore = require('ignore');
 let uuid = require('node-uuid');
 let os = require('os');
@@ -42,7 +42,7 @@ function uploadCwdToSource(app, cwd, fn) {
     let output = fs.createWriteStream(tempFilePath);
     archive.pipe(output);
     var data = {};
-    if (os.platform() == 'win32') {
+    if (os.platform() === 'win32') {
       data.mode = 0o0755;
     }
     archive.bulk([
@@ -58,8 +58,7 @@ function uploadCwdToSource(app, cwd, fn) {
   });
 }
 
-function create(context) {
-  let heroku = new Heroku({ token: context.auth.password });
+function create(context, heroku) {
   let app = heroku.apps(context.app);
 
   var sourceUrl = context.args['source-url'];
@@ -68,9 +67,9 @@ function create(context) {
       new Promise(function(resolve) { resolve(sourceUrl);}) :
       new Promise(function(resolve) { uploadCwdToSource(app, context.cwd, resolve); });
 
-  sourceUrlPromise.then(function(sourceGetUrl) {
+  return sourceUrlPromise.then(function(sourceGetUrl) {
     // TODO we have to bail out to `request` to get edge version
-    heroku.request({
+    return heroku.request({
       path: `/apps/${context.app}/builds`,
       method: 'POST',
       headers: {
@@ -84,9 +83,10 @@ function create(context) {
           version: context.args.version || ''
         }
       }
-    }).then(function(build) {
-      request.get(build.output_stream_url).pipe(process.stderr);
-    }).done();
+    });
+  })
+  .then(function(build) {
+    request.get(build.output_stream_url).pipe(process.stderr);
   });
 }
 
@@ -101,5 +101,5 @@ module.exports = {
     { name: 'source-url', description: 'Source URL that points to the tarball of your application\'s source code', hasValue: true},
     { name: 'version', description: 'Description of your new build', hasValue: true }
   ],
-  run: create
+  run: cli.command(create)
 };
