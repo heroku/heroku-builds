@@ -10,17 +10,18 @@ module.exports = {
   needsApp: true,
   description: 'show build output',
   help: 'Show build output for a Heroku app',
-  variableArgs: true,
+  args: [
+    {
+      name: 'id',
+      optional: false,
+      hidden: false
+    }
+  ],
   run: cli.command(showOutput)
 };
 
 function showOutput(context, heroku) {
-  let id = context.args[0];
-
-  if (!id) {
-    cli.error("Usage: heroku builds:output <id> -a <app>")
-    return
-  }
+  let id = context.args.id;
 
   return heroku.request({
     path: `/apps/${context.app}/builds/${id}`,
