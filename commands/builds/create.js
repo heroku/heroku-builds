@@ -68,18 +68,12 @@ function create(context, heroku) {
       new Promise(function(resolve) { uploadCwdToSource(app, context.cwd, resolve); });
 
   return sourceUrlPromise.then(function(sourceGetUrl) {
-    // TODO we have to bail out to `request` to get edge version
-    return heroku.request({
-      path: `/apps/${context.app}/builds`,
-      method: 'POST',
-      parseJSON: true,
-      body: {
+    return app.builds().create({
         source_blob: {
           url: sourceGetUrl,
           // TODO provide better default, eg. archive md5
           version: context.args.version || ''
         }
-      }
     });
   })
   .then(function(build) {

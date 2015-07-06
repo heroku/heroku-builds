@@ -25,11 +25,7 @@ function showOutput(context, heroku) {
 
   let id = context.args.id;
 
-  return heroku.request({
-    path: `/apps/${context.app}/builds/${id}`,
-    method: 'GET',
-    parseJSON: true
-  }).then(function (build) {
+  return app.builds(id).info().then(function (build) {
     request(build.output_stream_url).pipe(process.stdout);
   });
 }
