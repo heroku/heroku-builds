@@ -72,9 +72,6 @@ function create(context, heroku) {
     return heroku.request({
       path: `/apps/${context.app}/builds`,
       method: 'POST',
-      headers: {
-        'Accept': 'application/vnd.heroku+json; version=3.streaming-build-output'
-      },
       parseJSON: true,
       body: {
         source_blob: {
