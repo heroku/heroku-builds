@@ -21,7 +21,7 @@ module.exports = {
       var columnData = builds.slice(0, 10).map(function(build) {
         return { created_at: build.created_at,
           status: build.status,
-          version: build.source_blob.version,
+          id: build.id,
           user: build.user.email
         };
       });
