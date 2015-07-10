@@ -32,6 +32,11 @@ If you pass a `--source-url` argument to the `create` command, a build will be c
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
 
+### Show build output
+
+    heroku builds -a example-app # take note of the build ID you'd want to display
+    heroku builds:output <id> -a example-app
+
 ## Contributing
 
 Contributions to the plugin are welcome. Report bugs and suggestions using GitHub Issues on the repository.
