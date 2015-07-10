@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.10 - 2015-07-10
+
+- Modify builds to display the build id
+- Add builds:output <id> command
+
 ## 0.0.9 - 2015-06-15
 
 - Use `heroku-cli-util`
