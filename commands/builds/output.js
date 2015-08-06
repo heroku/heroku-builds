@@ -21,16 +21,11 @@ module.exports = {
 };
 
 function showOutput(context, heroku) {
+  let app = heroku.apps(context.app);
+
   let id = context.args.id;
 
-  return heroku.request({
-    path: `/apps/${context.app}/builds/${id}`,
-    method: 'GET',
-    headers: {
-      'Accept': 'application/vnd.heroku+json; version=3.streaming-build-output'
-    },
-    parseJSON: true
-  }).then(function (build) {
+  return app.builds(id).info().then(function (build) {
     request(build.output_stream_url).pipe(process.stdout);
   });
 }

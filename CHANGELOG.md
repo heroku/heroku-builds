@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.11 - 2015-08-06
+
+- Use main version of Heroku API
+
 ## 0.0.10 - 2015-07-10
 
 - Modify builds to display the build id
