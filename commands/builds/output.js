@@ -21,6 +21,8 @@ module.exports = {
 };
 
 function showOutput(context, heroku) {
+  let app = heroku.apps(context.app);
+
   let id = context.args.id;
 
   return heroku.request({
