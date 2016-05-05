@@ -11,7 +11,7 @@ let request = require('request');
 
 function uploadCwdToSource(app, cwd, fn) {
   let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz');
-  let ig = ignore().addIgnoreFile('.gitignore');
+  let ig = ignore().add(fs.readFileSync('.gitignore').toString());
   let filter = ig.createFilter();
 
   app.sources().create({}).then(function(source){
