@@ -61,7 +61,7 @@ function uploadCwdToSource(app, cwd, fn) {
 function create(context, heroku) {
   let app = heroku.apps(context.app);
 
-  var sourceUrl = context.args['source-url'];
+  var sourceUrl = context.flags['source-url'];
 
   var sourceUrlPromise = sourceUrl ?
       new Promise(function(resolve) { resolve(sourceUrl);}) :
@@ -72,7 +72,7 @@ function create(context, heroku) {
       source_blob: {
         url: sourceGetUrl,
         // TODO provide better default, eg. archive md5
-        version: context.args.version || ''
+        version: context.flags.version || ''
       }
     });
   })
