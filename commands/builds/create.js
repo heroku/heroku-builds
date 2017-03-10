@@ -14,11 +14,9 @@ function checkTarInstall(tar) {
   let tarVersion = exec(tar+" --version").toString()
 
   if (!tarVersion.match(/GNU tar/)) {
-    throw  `This command requires GNU tar to compress your app code.
-    Please install it, or specify the '--tar' option
-
-    -------------------------
-    ` + tarVersion.toString()
+    cli.warn("Builds can fail if their code is not compressed with GNU tar.")
+    cli.warn("Please install it, or specify the '--tar' option")
+    cli.warn("Detected tar version: "+tarVersion.toString())
   }
 }
 
