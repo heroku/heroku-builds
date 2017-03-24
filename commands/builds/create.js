@@ -1,51 +1,51 @@
 'use strict';
 
 let cli = require('heroku-cli-util');
-let archiver = require('archiver');
 let fs = require('fs');
-let ignore = require('ignore');
 let uuid = require('node-uuid');
 let os = require('os');
 let path = require('path');
 let request = require('request');
 let exec = require('child_process').execSync
+let nodeTar = require('../../lib/node_tar')
 
-function checkTarInstall(tar) {
+function compressSource(tar, cwd, tempFile, cb) {
   let tarVersion = exec(tar+" --version").toString()
 
-  if (!tarVersion.match(/GNU tar/)) {
-    cli.warn("Builds can fail if their code is not compressed with GNU tar.")
+  if (tarVersion.match(/GNU tar/)) {
+    exec(tar+" cz -C "+cwd+" --exclude .git --exclude .gitmodules . > "+tempFile)
+    cb()
+  } else {
+    cli.warn("Couldn't detect GNU tar. Builds could fail due to decompression errors")
+    cli.warn("See https://devcenter.heroku.com/articles/platform-api-deploying-slugs#create-slug-archive")
     cli.warn("Please install it, or specify the '--tar' option")
-    cli.warn("Detected tar version: "+tarVersion.toString())
+    cli.warn("Falling back to node's built-in compressor")
+    nodeTar.call(cwd, tempFile, cb)
   }
 }
 
 function uploadCwdToSource(app, cwd, tar, fn) {
   let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz');
-  let ig = ignore().add(fs.readFileSync('.gitignore').toString());
-  let filter = ig.createFilter();
 
-  checkTarInstall(tar)
   app.sources().create({}).then(function(source){
-    exec(tar+" cz -C "+cwd+" --exclude .git --exclude .gitmodules . > "+tempFilePath)
+    compressSource(tar, cwd, tempFilePath, function() {
+      let request_options = {
+        url: source.source_blob.put_url,
+        headers: {
+          'Content-Type': '',
+          'Content-Length': fs.statSync(tempFilePath).size
+        }
+      };
 
-    let filesize = fs.statSync(tempFilePath).size;
-    let request_options = {
-      url: source.source_blob.put_url,
-      headers: {
-        'Content-Type': '',
-        'Content-Length': filesize
-      }
-    };
+      var stream = fs.createReadStream(tempFilePath);
+      stream.on('close', function() {
+        fs.unlink(tempFilePath);
+      });
 
-    var stream = fs.createReadStream(tempFilePath);
-    stream.on('close', function() {
-      fs.unlink(tempFilePath);
-    });
-
-    stream.pipe(request.put(request_options, function() {
-      fn(source.source_blob.get_url);
-    }));
+      stream.pipe(request.put(request_options, function() {
+        fn(source.source_blob.get_url);
+      }));
+    })
   });
 }
 
