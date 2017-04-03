@@ -13,7 +13,7 @@ function compressSource(tar, cwd, tempFile, cb) {
   let tarVersion = exec(tar+" --version").toString()
 
   if (tarVersion.match(/GNU tar/)) {
-    exec(tar+" cz -C "+cwd+" --exclude .git --exclude .gitmodules . > "+tempFile)
+    exec(tar+" cz -C "+cwd+" --exclude .git --exclude .gitmodules . --exclude-vcs-ignores > "+tempFile)
     cb()
   } else {
     cli.warn("Couldn't detect GNU tar. Builds could fail due to decompression errors")
