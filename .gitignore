@@ -1,3 +1,5 @@
 .DS_Store
 .jshint*
 /node_modules/
+coverage
+.nyc_output
