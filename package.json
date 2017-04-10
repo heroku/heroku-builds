@@ -16,6 +16,9 @@
     "url": "https://github.com/heroku/heroku-build/issues"
   },
   "homepage": "https://github.com/heroku/heroku-build",
+  "scripts": {
+    "test": "TZ=utc nyc mocha && standard"
+  },
   "dependencies": {
     "archiver": "1.0.0",
     "columnify": "1.5.4",
@@ -25,6 +28,15 @@
     "request": "2.72.0"
   },
   "devDependencies": {
-    "jshint": "*"
+    "jshint": "*",
+    "mocha": "3.2.0",
+    "mocha-junit-reporter": "1.13.0",
+    "mockdate": "2.0.1",
+    "nock": "9.0.4",
+    "nyc": "10.1.2",
+    "standard": "8.6.0"
+  },
+  "standard": {
+    "env": "mocha"
   }
 }

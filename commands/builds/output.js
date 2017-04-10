@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-let cli     = require('heroku-cli-util');
-let request = require('request');
+let cli = require('heroku-cli-util')
+let request = require('request')
 
 module.exports = {
   topic: 'builds',
@@ -18,14 +18,14 @@ module.exports = {
     }
   ],
   run: cli.command(showOutput)
-};
+}
 
-function showOutput(context, heroku) {
-  let app = heroku.apps(context.app);
+function showOutput (context, heroku) {
+  let app = heroku.apps(context.app)
 
-  let id = context.args.id;
+  let id = context.args.id
 
   return app.builds(id).info().then(function (build) {
-    request(build.output_stream_url).pipe(process.stdout);
-  });
+    request(build.output_stream_url).pipe(process.stdout)
+  })
 }
