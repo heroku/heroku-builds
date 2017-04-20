@@ -1,7 +1,39 @@
 'use strict'
 
-let cli = require('heroku-cli-util')
-let columnify = require('columnify')
+const cli = require('heroku-cli-util')
+const co = require('co')
+const time = require('../../lib/time')
+
+function statusColor (s) {
+  switch (s) {
+    case 'pending':
+      return 'yellow'
+    case 'failed':
+      return 'red'
+    default:
+      return 'white'
+  }
+}
+
+function * run (context, heroku) {
+  let builds = yield heroku.request({
+    path: `/apps/${context.app}/builds`,
+    partial: true,
+    headers: {
+      'Range': `created_at ..; max=${context.flags.num || 15}, order=desc`
+    }
+  })
+
+  cli.styledHeader(`${context.app} Builds`)
+  cli.table(builds, {
+    printHeader: false,
+    columns: [
+      {key: 'created_at', format: (t) => time.ago(new Date(t))},
+      {key: 'source_blob.version', format: (v, b) => cli.color[statusColor(b.status)](v)},
+      {key: 'user', format: (u) => cli.color.magenta(u.email.replace(/@addons\.heroku\.com$/, ''))}
+    ]
+  })
+}
 
 module.exports = {
   topic: 'builds',
@@ -9,30 +41,8 @@ module.exports = {
   needsApp: true,
   description: 'list builds',
   help: 'List builds for a Heroku app',
-  run: cli.command(function (context, heroku) {
-    return heroku.request({
-      path: `/apps/${context.app}/builds`,
-      method: 'GET',
-      headers: {
-        'Range': 'created_at ..; order=desc;'
-      },
-      parseJSON: true
-    }).then(function (builds) {
-      var columnData = builds.slice(0, 10).map(function (build) {
-        return { created_at: build.created_at,
-          status: build.status,
-          id: build.id,
-          version: build.source_blob.version,
-          user: build.user.email
-        }
-      })
-
-      // TODO: use `max` directive in query to avoid the slice nonsense
-      // heroku-client currently breaks if one tries to do this
-      var columns = columnify(columnData, {
-        showHeaders: false
-      })
-      console.log(columns)
-    })
-  })
+  flags: [
+    {name: 'num', char: 'n', description: 'number of builds to show', hasValue: true}
+  ],
+  run: cli.command(co.wrap(run))
 }
