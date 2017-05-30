@@ -57,7 +57,7 @@ function create (context, heroku) {
 
   var sourceUrlPromise = sourceUrl
     ? new Promise(function (resolve) { resolve(sourceUrl) })
-    : new Promise(function (resolve) { uploadCwdToSource(app, context.cwd, tar, resolve) })
+    : new Promise(function (resolve) { uploadCwdToSource(app, process.cwd(), tar, resolve) })
 
   return sourceUrlPromise.then(function (sourceGetUrl) {
     return app.builds().create({
