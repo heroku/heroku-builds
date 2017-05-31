@@ -28,6 +28,7 @@ function * run (context, heroku) {
   cli.table(builds, {
     printHeader: false,
     columns: [
+      {key: 'id', format: (t) => t},
       {key: 'created_at', format: (t) => time.ago(new Date(t))},
       {key: 'source_blob.version', format: (v, b) => cli.color[statusColor(b.status)](v)},
       {key: 'user', format: (u) => cli.color.magenta(u.email.replace(/@addons\.heroku\.com$/, ''))}
