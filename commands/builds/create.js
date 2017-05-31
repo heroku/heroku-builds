@@ -88,10 +88,10 @@ module.exports = {
   help: 'Create build from contents of current dir',
   description: 'create build',
   flags: [
-    { name: 'source-url', description: 'Source URL that points to the tarball of your application\'s source code', hasValue: true },
-    { name: 'tar', description: 'Path to the executable GNU tar', hasValue: true },
-    { name: 'version', description: 'Description of your new build', hasValue: true },
-    { name: 'exclude-vcs-ignore', description: 'Exclude files ignores by VCS (.gitignore, ...) from the build', hasValue: true }
+    { name: 'source-url', description: 'source URL that points to the tarball of your application\'s source code', hasValue: true },
+    { name: 'tar', description: 'path to the executable GNU tar', hasValue: true },
+    { name: 'version', description: 'description of your new build', hasValue: true },
+    { name: 'exclude-vcs-ignore', description: 'exclude files ignores by VCS (.gitignore, ...) from the build', hasValue: true }
   ],
   run: cli.command(create)
 }
