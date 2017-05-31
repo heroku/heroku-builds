@@ -13,10 +13,10 @@ function compressSource (context, tar, cwd, tempFile, cb) {
   let tarVersion = exec(tar + ' --version').toString()
 
   if (tarVersion.match(/GNU tar/)) {
-    let excludeVcsIgnore = context.flags['exclude-vcs-ignore'] || 'true'
+    let includeVcsIgnore = context.flags['include-vcs-ignore']
     let command = tar + ' cz -C ' + cwd + ' --exclude .git --exclude .gitmodules .'
 
-    if (excludeVcsIgnore === 'true') {
+    if (!includeVcsIgnore) {
       command += ' --exclude-vcs-ignores'
     }
 
@@ -91,7 +91,7 @@ module.exports = {
     { name: 'source-url', description: 'source URL that points to the tarball of your application\'s source code', hasValue: true },
     { name: 'tar', description: 'path to the executable GNU tar', hasValue: true },
     { name: 'version', description: 'description of your new build', hasValue: true },
-    { name: 'exclude-vcs-ignore', description: 'exclude files ignores by VCS (.gitignore, ...) from the build', hasValue: true }
+    { name: 'include-vcs-ignore', description: 'include files ignores by VCS (.gitignore, ...) from the build' }
   ],
   run: cli.command(create)
 }
