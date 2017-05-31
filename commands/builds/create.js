@@ -9,11 +9,18 @@ let request = require('request')
 let exec = require('child_process').execSync
 let nodeTar = require('../../lib/node_tar')
 
-function compressSource (tar, cwd, tempFile, cb) {
+function compressSource (context, tar, cwd, tempFile, cb) {
   let tarVersion = exec(tar + ' --version').toString()
 
   if (tarVersion.match(/GNU tar/)) {
-    exec(tar + ' cz -C ' + cwd + ' --exclude .git --exclude .gitmodules . --exclude-vcs-ignores > ' + tempFile)
+    let excludeVcsIgnore = context.flags['exclude-vcs-ignore'] || 'true'
+    let command = tar + ' cz -C ' + cwd + ' --exclude .git --exclude .gitmodules .'
+
+    if (excludeVcsIgnore === 'true') {
+      command += ' --exclude-vcs-ignores'
+    }
+
+    exec(command + ' > ' + tempFile)
     cb()
   } else {
     cli.warn('Couldn\'t detect GNU tar. Builds could fail due to decompression errors')
@@ -24,11 +31,11 @@ function compressSource (tar, cwd, tempFile, cb) {
   }
 }
 
-function uploadCwdToSource (app, cwd, tar, fn) {
+function uploadCwdToSource (context, app, cwd, tar, fn) {
   let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
 
   app.sources().create({}).then(function (source) {
-    compressSource(tar, cwd, tempFilePath, function () {
+    compressSource(context, tar, cwd, tempFilePath, function () {
       let requestOptions = {
         url: source.source_blob.put_url,
         headers: {
@@ -57,7 +64,7 @@ function create (context, heroku) {
 
   var sourceUrlPromise = sourceUrl
     ? new Promise(function (resolve) { resolve(sourceUrl) })
-    : new Promise(function (resolve) { uploadCwdToSource(app, process.cwd(), tar, resolve) })
+    : new Promise(function (resolve) { uploadCwdToSource(context, app, process.cwd(), tar, resolve) })
 
   return sourceUrlPromise.then(function (sourceGetUrl) {
     return app.builds().create({
@@ -83,7 +90,8 @@ module.exports = {
   flags: [
     { name: 'source-url', description: 'Source URL that points to the tarball of your application\'s source code', hasValue: true },
     { name: 'tar', description: 'Path to the executable GNU tar', hasValue: true },
-    { name: 'version', description: 'Description of your new build', hasValue: true }
+    { name: 'version', description: 'Description of your new build', hasValue: true },
+    { name: 'exclude-vcs-ignore', description: 'Exclude files ignores by VCS (.gitignore, ...) from the build', hasValue: true }
   ],
   run: cli.command(create)
 }
