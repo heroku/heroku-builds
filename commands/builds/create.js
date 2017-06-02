@@ -76,7 +76,13 @@ function create (context, heroku) {
     })
   })
   .then(function (build) {
-    request.get(build.output_stream_url).pipe(process.stderr)
+    return new Promise(function (resolve, reject) {
+      let stream = cli.got.stream(build.output_stream_url)
+      stream.on('error', reject)
+      stream.on('end', resolve)
+      let piped = stream.pipe(process.stderr)
+      piped.on('error', reject)
+    })
   })
 }
 
