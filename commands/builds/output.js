@@ -1,7 +1,6 @@
 'use strict'
 
 let cli = require('heroku-cli-util')
-let request = require('request')
 
 module.exports = {
   topic: 'builds',
@@ -26,6 +25,12 @@ function showOutput (context, heroku) {
   let id = context.args.id
 
   return app.builds(id).info().then(function (build) {
-    request(build.output_stream_url).pipe(process.stdout)
+    return new Promise(function (resolve, reject) {
+      let stream = cli.got.stream(build.output_stream_url)
+      stream.on('error', reject)
+      stream.on('end', resolve)
+      let piped = stream.pipe(process.stderr)
+      piped.on('error', reject)
+    })
   })
 }
