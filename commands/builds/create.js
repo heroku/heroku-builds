@@ -5,7 +5,6 @@ let fs = require('fs')
 let uuid = require('node-uuid')
 let os = require('os')
 let path = require('path')
-let request = require('request')
 let exec = require('child_process').execSync
 let nodeTar = require('../../lib/node_tar')
 
@@ -36,22 +35,21 @@ function uploadCwdToSource (context, app, cwd, tar, fn) {
 
   app.sources().create({}).then(function (source) {
     compressSource(context, tar, cwd, tempFilePath, function () {
-      let requestOptions = {
-        url: source.source_blob.put_url,
-        headers: {
-          'Content-Type': '',
-          'Content-Length': fs.statSync(tempFilePath).size
-        }
-      }
-
       var stream = fs.createReadStream(tempFilePath)
       stream.on('close', function () {
         fs.unlink(tempFilePath)
       })
 
-      stream.pipe(request.put(requestOptions, function () {
-        fn(source.source_blob.get_url)
-      }))
+      cli.got.put(source.source_blob.put_url, {
+        body: stream,
+        headers: {
+          'Content-Type': '',
+          'Content-Length': fs.statSync(tempFilePath).size
+        }
+      })
+        .then(function () {
+          fn(source.source_blob.get_url)
+        })
     })
   })
 }

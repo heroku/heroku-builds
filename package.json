@@ -25,7 +25,6 @@
     "heroku-cli-util": "5.10.10",
     "ignore": "3.1.2",
     "node-uuid": "1.4.7",
-    "request": "2.72.0",
     "strftime": "0.10.0"
   },
   "devDependencies": {
