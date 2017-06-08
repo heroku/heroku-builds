@@ -8,7 +8,8 @@ let path = require('path')
 let exec = require('child_process').execSync
 let nodeTar = require('../../lib/node_tar')
 
-function compressSource (context, tar, cwd, tempFile, cb) {
+function compressSource (context, cwd, tempFile, cb) {
+  var tar = context.flags['tar'] || 'tar'
   let tarVersion = exec(tar + ' --version').toString()
 
   if (tarVersion.match(/GNU tar/)) {
@@ -30,11 +31,14 @@ function compressSource (context, tar, cwd, tempFile, cb) {
   }
 }
 
-function uploadCwdToSource (context, app, cwd, tar, fn) {
+function uploadCwdToSource (context, heroku, cwd, fn) {
   let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
 
-  app.sources().create({}).then(function (source) {
-    compressSource(context, tar, cwd, tempFilePath, function () {
+  heroku.request({
+    method: 'POST',
+    path: '/sources'
+  }).then(function (source) {
+    compressSource(context, cwd, tempFilePath, function () {
       var stream = fs.createReadStream(tempFilePath)
       stream.on('close', function () {
         fs.unlink(tempFilePath)
@@ -55,21 +59,22 @@ function uploadCwdToSource (context, app, cwd, tar, fn) {
 }
 
 function create (context, heroku) {
-  let app = heroku.apps(context.app)
-
   var sourceUrl = context.flags['source-url']
-  var tar = context.flags['tar'] || 'tar'
 
   var sourceUrlPromise = sourceUrl
     ? new Promise(function (resolve) { resolve(sourceUrl) })
-    : new Promise(function (resolve) { uploadCwdToSource(context, app, process.cwd(), tar, resolve) })
+    : new Promise(function (resolve) { uploadCwdToSource(context, heroku, process.cwd(), resolve) })
 
   return sourceUrlPromise.then(function (sourceGetUrl) {
-    return app.builds().create({
-      source_blob: {
-        url: sourceGetUrl,
-        // TODO provide better default, eg. archive md5
-        version: context.flags.version || ''
+    return heroku.request({
+      method: 'POST',
+      path: `/apps/${context.app}/builds`,
+      body: {
+        source_blob: {
+          url: sourceGetUrl,
+          // TODO provide better default, eg. archive md5
+          version: context.flags.version || ''
+        }
       }
     })
   })
