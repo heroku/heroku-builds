@@ -22,10 +22,9 @@
   "dependencies": {
     "archiver": "1.0.0",
     "columnify": "1.5.4",
-    "heroku-cli-util": "5.10.10",
+    "heroku-cli-util": "6.1.17",
     "ignore": "3.1.2",
     "node-uuid": "1.4.7",
-    "request": "2.72.0",
     "strftime": "0.10.0"
   },
   "devDependencies": {
