@@ -35,6 +35,7 @@
     "nock": "9.0.4",
     "nyc": "10.1.2",
     "standard": "8.6.0",
+    "std-mocks": "1.0.1",
     "unexpected": "10.25.0"
   },
   "standard": {

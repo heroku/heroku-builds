@@ -20,17 +20,13 @@ module.exports = {
 }
 
 function showOutput (context, heroku) {
-  let app = heroku.apps(context.app)
-
-  let id = context.args.id
-
-  return app.builds(id).info().then(function (build) {
-    return new Promise(function (resolve, reject) {
-      let stream = cli.got.stream(build.output_stream_url)
-      stream.on('error', reject)
-      stream.on('end', resolve)
-      let piped = stream.pipe(process.stderr)
-      piped.on('error', reject)
+  return heroku.get(`/apps/${context.app}/builds/${context.args.id}`)
+    .then(function (build) {
+      return new Promise(function (resolve, reject) {
+        let stream = cli.got.stream(build.output_stream_url)
+        stream.on('error', reject)
+        stream.on('end', resolve)
+        stream.pipe(process.stderr)
+      })
     })
-  })
 }
