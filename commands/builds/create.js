@@ -11,7 +11,13 @@ let nodeTar = require('../../lib/node_tar')
 function compressSource (context, cwd, tempFile) {
   return new Promise(function (resolve, reject) {
     var tar = context.flags['tar'] || 'tar'
-    let tarVersion = exec(tar + ' --version').toString()
+    let tarVersion = ''
+
+    try {
+      tarVersion = exec(tar + ' --version').toString()
+    } catch (err) {
+      // tar was not found on the system
+    }
 
     if (tarVersion.match(/GNU tar/)) {
       let includeVcsIgnore = context.flags['include-vcs-ignore']

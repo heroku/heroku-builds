@@ -58,4 +58,24 @@ describe('builds create', () => {
       .then(() => api.done())
       .then(() => busl.done())
   })
+
+  it('creates a new build with node tar', () => {
+    process.stdout.columns = 80
+    let busl = nock('https://busl.test:443')
+      .get('/streams/build.log')
+      .reply(200, 'Streamed Build Output')
+    let api = nock('https://api.heroku.com:443')
+      .post('/sources')
+      .reply(200, source)
+      .put('/sources/1234.tgz')
+      .reply(200)
+      .post('/apps/myapp/builds')
+      .reply(200, build)
+
+    return cmd.run({app: 'myapp', flags: {cwd: process.cwd() + '/test', tar: 'no-tar'}})
+      .then(() => expect(cli.stdout, 'to be empty'))
+      .then(() => expect(cli.stderr, 'to contain', 'Couldn\'t detect GNU tar. Builds could fail due to decompression errors'))
+      .then(() => api.done())
+      .then(() => busl.done())
+  })
 })
