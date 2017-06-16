@@ -75,26 +75,26 @@ function create (context, heroku) {
     ? new Promise(function (resolve) { resolve(sourceUrl) })
     : new Promise(function (resolve, reject) { uploadCwdToSource(context, heroku, cwd).then(resolve, reject) })
 
-  return sourceUrlPromise.then(function (sourceGetUrl) {
-    return heroku.request({
-      method: 'POST',
-      path: `/apps/${context.app}/builds`,
-      body: {
-        source_blob: {
-          url: sourceGetUrl,
-          // TODO provide better default, eg. archive md5
-          version: context.flags.version || ''
+  return new Promise(function (resolve, reject) {
+    sourceUrlPromise.then(function (sourceGetUrl) {
+      heroku.request({
+        method: 'POST',
+        path: `/apps/${context.app}/builds`,
+        body: {
+          source_blob: {
+            url: sourceGetUrl,
+            // TODO provide better default, eg. archive md5
+            version: context.flags.version || ''
+          }
         }
-      }
-    }).then(function (build) {
-      return new Promise(function (resolve, reject) {
+      }).then(function (build) {
         let stream = cli.got.stream(build.output_stream_url)
         stream.on('error', reject)
         stream.on('end', resolve)
         let piped = stream.pipe(process.stderr)
         piped.on('error', reject)
-      })
-    })
+      }, reject)
+    }, reject)
   })
 }
 
