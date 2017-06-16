@@ -56,17 +56,18 @@ function uploadCwdToSource (context, heroku, cwd) {
         }).then(function () {
           resolve(source.source_blob.get_url)
         }, reject)
-      })
-    })
+      }, reject)
+    }, reject)
   })
 }
 
 function create (context, heroku) {
   var sourceUrl = context.flags['source-url']
+  var cwd = context.flags['cwd'] || process.cwd()
 
   var sourceUrlPromise = sourceUrl
     ? new Promise(function (resolve) { resolve(sourceUrl) })
-    : new Promise(function (resolve, reject) { uploadCwdToSource(context, heroku, process.cwd()).then(resolve, reject) })
+    : new Promise(function (resolve, reject) { uploadCwdToSource(context, heroku, cwd).then(resolve, reject) })
 
   return sourceUrlPromise.then(function (sourceGetUrl) {
     return heroku.request({
@@ -79,15 +80,14 @@ function create (context, heroku) {
           version: context.flags.version || ''
         }
       }
-    })
-  })
-  .then(function (build) {
-    return new Promise(function (resolve, reject) {
-      let stream = cli.got.stream(build.output_stream_url)
-      stream.on('error', reject)
-      stream.on('end', resolve)
-      let piped = stream.pipe(process.stderr)
-      piped.on('error', reject)
+    }).then(function (build) {
+      return new Promise(function (resolve, reject) {
+        let stream = cli.got.stream(build.output_stream_url)
+        stream.on('error', reject)
+        stream.on('end', resolve)
+        let piped = stream.pipe(process.stderr)
+        piped.on('error', reject)
+      })
     })
   })
 }
@@ -101,6 +101,7 @@ module.exports = {
   description: 'create build',
   flags: [
     { name: 'source-url', description: 'source URL that points to the tarball of your application\'s source code', hasValue: true },
+    { name: 'cwd', description: 'the local path to build. Defaults to pwd', hasValue: true },
     { name: 'tar', description: 'path to the executable GNU tar', hasValue: true },
     { name: 'version', description: 'description of your new build', hasValue: true },
     { name: 'include-vcs-ignore', description: 'include files ignores by VCS (.gitignore, ...) from the build' }
