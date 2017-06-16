@@ -8,52 +8,55 @@ let path = require('path')
 let exec = require('child_process').execSync
 let nodeTar = require('../../lib/node_tar')
 
-function compressSource (context, cwd, tempFile, cb) {
-  var tar = context.flags['tar'] || 'tar'
-  let tarVersion = exec(tar + ' --version').toString()
+function compressSource (context, cwd, tempFile) {
+  return new Promise(function (resolve, reject) {
+    var tar = context.flags['tar'] || 'tar'
+    let tarVersion = exec(tar + ' --version').toString()
 
-  if (tarVersion.match(/GNU tar/)) {
-    let includeVcsIgnore = context.flags['include-vcs-ignore']
-    let command = tar + ' cz -C ' + cwd + ' --exclude .git --exclude .gitmodules .'
+    if (tarVersion.match(/GNU tar/)) {
+      let includeVcsIgnore = context.flags['include-vcs-ignore']
+      let command = tar + ' cz -C ' + cwd + ' --exclude .git --exclude .gitmodules .'
 
-    if (!includeVcsIgnore) {
-      command += ' --exclude-vcs-ignores'
+      if (!includeVcsIgnore) {
+        command += ' --exclude-vcs-ignores'
+      }
+
+      exec(command + ' > ' + tempFile)
+      resolve()
+    } else {
+      cli.warn('Couldn\'t detect GNU tar. Builds could fail due to decompression errors')
+      cli.warn('See https://devcenter.heroku.com/articles/platform-api-deploying-slugs#create-slug-archive')
+      cli.warn('Please install it, or specify the \'--tar\' option')
+      cli.warn('Falling back to node\'s built-in compressor')
+      nodeTar.call(cwd, tempFile).then(resolve, reject)
     }
-
-    exec(command + ' > ' + tempFile)
-    cb()
-  } else {
-    cli.warn('Couldn\'t detect GNU tar. Builds could fail due to decompression errors')
-    cli.warn('See https://devcenter.heroku.com/articles/platform-api-deploying-slugs#create-slug-archive')
-    cli.warn('Please install it, or specify the \'--tar\' option')
-    cli.warn('Falling back to node\'s built-in compressor')
-    nodeTar.call(cwd, tempFile, cb)
-  }
+  })
 }
 
-function uploadCwdToSource (context, heroku, cwd, fn) {
-  let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
+function uploadCwdToSource (context, heroku, cwd) {
+  return new Promise(function (resolve, reject) {
+    let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
 
-  heroku.request({
-    method: 'POST',
-    path: '/sources'
-  }).then(function (source) {
-    compressSource(context, cwd, tempFilePath, function () {
-      var stream = fs.createReadStream(tempFilePath)
-      stream.on('close', function () {
-        fs.unlink(tempFilePath)
-      })
-
-      cli.got.put(source.source_blob.put_url, {
-        body: stream,
-        headers: {
-          'Content-Type': '',
-          'Content-Length': fs.statSync(tempFilePath).size
-        }
-      })
-        .then(function () {
-          fn(source.source_blob.get_url)
+    heroku.request({
+      method: 'POST',
+      path: '/sources'
+    }).then(function (source) {
+      compressSource(context, cwd, tempFilePath).then(function () {
+        var stream = fs.createReadStream(tempFilePath)
+        stream.on('close', function () {
+          fs.unlink(tempFilePath)
         })
+
+        cli.got.put(source.source_blob.put_url, {
+          body: stream,
+          headers: {
+            'Content-Type': '',
+            'Content-Length': fs.statSync(tempFilePath).size
+          }
+        }).then(function () {
+          resolve(source.source_blob.get_url)
+        }, reject)
+      })
     })
   })
 }
@@ -63,7 +66,7 @@ function create (context, heroku) {
 
   var sourceUrlPromise = sourceUrl
     ? new Promise(function (resolve) { resolve(sourceUrl) })
-    : new Promise(function (resolve) { uploadCwdToSource(context, heroku, process.cwd(), resolve) })
+    : new Promise(function (resolve, reject) { uploadCwdToSource(context, heroku, process.cwd()).then(resolve, reject) })
 
   return sourceUrlPromise.then(function (sourceGetUrl) {
     return heroku.request({
