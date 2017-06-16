@@ -52,7 +52,7 @@ describe('builds create', () => {
       .post('/apps/myapp/builds')
       .reply(200, build)
 
-    return cmd.run({app: 'myapp', flags: {cwd: process.cwd() + '/test'}})
+    return cmd.run({app: 'myapp', flags: {cwd: process.cwd() + '/test', 'include-vcs-ignore': true}})
       .then(() => expect(cli.stdout, 'to be empty'))
       .then(() => expect(cli.stderr, 'to be empty'))
       .then(() => api.done())
