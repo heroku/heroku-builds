@@ -16,7 +16,11 @@ function compressSource (context, cwd, tempFile) {
     try {
       tarVersion = exec(tar + ' --version').toString()
     } catch (err) {
-      // tar was not found on the system
+      if (err.toString().match(/not found/)) {
+        // tar was not found on the system
+      } else {
+        throw err
+      }
     }
 
     if (tarVersion.match(/GNU tar/)) {
