@@ -39,32 +39,18 @@ function compressSource (context, cwd, tempFile) {
   })
 }
 
-function uploadCwdToSource (context, heroku, cwd) {
-  return new Promise(function (resolve, reject) {
-    let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
-
-    heroku.request({
-      method: 'POST',
-      path: '/sources'
-    }).then(function (source) {
-      compressSource(context, cwd, tempFilePath).then(function () {
-        var stream = fs.createReadStream(tempFilePath)
-        stream.on('close', function () {
-          fs.unlink(tempFilePath)
-        })
-
-        cli.got.put(source.source_blob.put_url, {
-          body: stream,
-          headers: {
-            'Content-Type': '',
-            'Content-Length': fs.statSync(tempFilePath).size
-          }
-        }).then(function () {
-          resolve(source.source_blob.get_url)
-        }, reject)
-      }, reject)
-    }, reject)
+async function uploadCwdToSource (context, heroku, cwd) {
+  let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
+  let source = await heroku.post('/sources')
+  await compressSource(context, cwd, tempFilePath)
+  await cli.got.put(source.source_blob.put_url, {
+    body: fs.createReadStream(tempFilePath),
+    headers: {
+      'Content-Type': '',
+      'Content-Length': fs.statSync(tempFilePath).size
+    }
   })
+  return source.source_blob.get_url
 }
 
 function create (context, heroku) {
