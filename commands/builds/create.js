@@ -57,34 +57,29 @@ async function uploadDirToSource (context, heroku, dir) {
   return source.source_blob.get_url
 }
 
-function create (context, heroku) {
-  var sourceUrl = context.flags['source-url']
-  var dir = context.flags['dir'] || process.cwd()
+async function create (context, heroku) {
+  let sourceUrl = context.flags['source-url']
+  let dir = context.flags.dir || process.cwd()
 
-  var sourceUrlPromise = sourceUrl
-    ? new Promise(function (resolve) { resolve(sourceUrl) })
-    : new Promise(function (resolve, reject) { uploadDirToSource(context, heroku, dir).then(resolve, reject) })
+  if (!sourceUrl) {
+    sourceUrl = await uploadDirToSource(context, heroku, dir)
+  }
 
-  return new Promise(function (resolve, reject) {
-    sourceUrlPromise.then(function (sourceGetUrl) {
-      heroku.request({
-        method: 'POST',
-        path: `/apps/${context.app}/builds`,
-        body: {
-          source_blob: {
-            url: sourceGetUrl,
-            // TODO provide better default, eg. archive md5
-            version: context.flags.version || ''
-          }
-        }
-      }).then(function (build) {
-        let stream = cli.got.stream(build.output_stream_url)
-        stream.on('error', reject)
-        stream.on('end', resolve)
-        let piped = stream.pipe(process.stderr)
-        piped.on('error', reject)
-      }, reject)
-    }, reject)
+  let build = await heroku.post(`/apps/${context.app}/builds`, {
+    body: {
+      source_blob: {
+        url: sourceUrl,
+        // TODO: look at heroku/heroku-cli-builds to see how to get the md5
+        version: context.flags.version || ''
+      }
+    }
+  })
+
+  return new Promise((resolve, reject) => {
+    let stream = cli.got.stream(build.output_stream_url)
+    stream.on('error', reject)
+    stream.on('end', resolve)
+    stream.pipe(process.stderr)
   })
 }
 
