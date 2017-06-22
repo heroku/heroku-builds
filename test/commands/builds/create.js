@@ -52,7 +52,7 @@ describe('builds create', () => {
       .post('/apps/myapp/builds')
       .reply(200, build)
 
-    return cmd.run({app: 'myapp', flags: {cwd: process.cwd() + '/test', 'include-vcs-ignore': true}})
+    return cmd.run({app: 'myapp', flags: {dir: process.cwd() + '/test', 'include-vcs-ignore': true}})
       .then(() => expect(cli.stdout, 'to be empty'))
       .then(() => expect(cli.stderr, 'to be empty'))
       .then(() => api.done())
@@ -72,7 +72,7 @@ describe('builds create', () => {
       .post('/apps/myapp/builds')
       .reply(200, build)
 
-    return cmd.run({app: 'myapp', flags: {cwd: process.cwd() + '/test', tar: 'no-tar'}})
+    return cmd.run({app: 'myapp', flags: {dir: process.cwd() + '/test', tar: 'no-tar'}})
       .then(() => expect(cli.stdout, 'to be empty'))
       .then(() => expect(cli.stderr, 'to contain', 'Couldn\'t detect GNU tar. Builds could fail due to decompression errors'))
       .then(() => api.done())
