@@ -1,6 +1,8 @@
 'use strict'
 
 let cli = require('heroku-cli-util')
+let co = require('co')
+let builds = require('../../lib/builds')
 
 module.exports = {
   topic: 'builds',
@@ -12,21 +14,20 @@ module.exports = {
   args: [
     {
       name: 'id',
-      optional: false,
+      optional: true,
       hidden: false
     }
   ],
-  run: cli.command(showOutput)
+  run: cli.command(co.wrap(run))
 }
 
-function showOutput (context, heroku) {
-  return heroku.get(`/apps/${context.app}/builds/${context.args.id}`)
-    .then(function (build) {
-      return new Promise(function (resolve, reject) {
-        let stream = cli.got.stream(build.output_stream_url)
-        stream.on('error', reject)
-        stream.on('end', resolve)
-        stream.pipe(process.stderr)
-      })
-    })
+function * run (context, heroku) {
+  let build = yield builds.FindByLatestOrId(heroku, context.app, context.args.id)
+
+  return new Promise(function (resolve, reject) {
+    let stream = cli.got.stream(build.output_stream_url)
+    stream.on('error', reject)
+    stream.on('end', resolve)
+    stream.pipe(process.stderr)
+  })
 }

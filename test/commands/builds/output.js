@@ -27,4 +27,22 @@ describe('builds:output', function () {
       .then(() => stdMocks.restore())
       .catch(() => stdMocks.restore())
   })
+
+  it('shows the output from the latest build', function () {
+    stdMocks.use()
+    process.stdout.columns = 80
+    let busl = nock('https://busl.test:443')
+      .get('/streams/build.log')
+      .reply(200, 'Build Content')
+    let api = nock('https://api.heroku.com:443')
+      .get('/apps/myapp/builds')
+      .reply(200, [{ output_stream_url: 'https://busl.test/streams/build.log' }])
+    return cmd.run({app: 'myapp', args: {}})
+      .then(() => expect(stdMocks.flush().stdout.join('')).to.equal('Build Content'))
+      .then(() => expect(cli.stderr).to.equal(''))
+      .then(() => busl.done())
+      .then(() => api.done())
+      .then(() => stdMocks.restore())
+      .catch(() => stdMocks.restore())
+  })
 })
