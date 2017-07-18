@@ -6,5 +6,6 @@ exports.topic = {
 exports.commands = [
   require('./commands/builds/create'),
   require('./commands/builds/index'),
+  require('./commands/builds/info'),
   require('./commands/builds/output')
 ]
