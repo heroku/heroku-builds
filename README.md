@@ -11,12 +11,13 @@ Heroku CLI plugin to list and create builds for Heroku apps.
 ### List builds
 
     heroku builds -a example-app
-
-### Build info
-
-    heroku builds:info -a example-app
-
+    
 Lists 10 most recently created builds for `example-app`
+
+### Show build output
+
+    heroku builds -a example-app # take note of the build ID you'd want to display
+    heroku builds:output <id> -a example-app
 
 ### Create build from local dir
 
@@ -35,11 +36,6 @@ If you pass a `--source-url` argument to the `create` command, a build will be c
     heroku builds:create --source-url https://github.com/heroku/node-js-sample/archive/master.tar.gz -a example-app
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
-
-### Show build output
-
-    heroku builds -a example-app # take note of the build ID you'd want to display
-    heroku builds:output <id> -a example-app
 
 ## Contributing
 
