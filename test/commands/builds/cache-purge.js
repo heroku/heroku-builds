@@ -13,7 +13,7 @@ describe('builds cache purge', () => {
       .delete('/apps/myapp/build-cache')
       .reply(200)
 
-    return cmd.run({app: 'myapp'})
+    return cmd.run({app: 'myapp', flags: {confirm: 'myapp'}})
       .then(() => expect(cli.stdout, 'to be empty'))
       .then(() => expect(cli.stderr, 'to equal', 'Purging build cache for myapp... done\n'))
       .then(() => api.done())
