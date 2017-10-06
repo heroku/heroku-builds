@@ -41,6 +41,12 @@ As above, build output is streamed to `stderr` and an optional `--version` argum
     heroku builds -a example-app # take note of the build ID you'd want to display
     heroku builds:output <id> -a example-app
 
+### Purge build cache
+
+    heroku builds:cache:purge -a example-app
+
+Clears the build cache, used by buildpacks to store information across builds
+
 ## Contributing
 
 Contributions to the plugin are welcome. Report bugs and suggestions using GitHub Issues on the repository.
