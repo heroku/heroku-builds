@@ -36,6 +36,14 @@ If you pass a `--source-url` argument to the `create` command, a build will be c
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
 
+### Create build from local tarball
+
+If you pass a `--source-tar` argument to the `create` command, a build will be created from the contents of a tarball found at the path given. The current working directory contents is not used. Example:
+
+    heroku builds:create --source-tar master.tar.gz -a example-app
+
+As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
+
 ### Show build output
 
     heroku builds -a example-app # take note of the build ID you'd want to display
