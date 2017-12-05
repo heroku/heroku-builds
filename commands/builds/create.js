@@ -43,15 +43,23 @@ function compressSource (context, dir, tempFile) {
   })
 }
 
-async function uploadDirToSource (context, heroku, dir) {
-  let tempFilePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
+async function uploadDirToSource (context, heroku, tarPath) {
+  let filePath
+
+  if (fs.statSync(tarPath).isDirectory()) {
+    filePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
+    await compressSource(context, tarPath, filePath)
+  } else {
+    filePath = tarPath
+  }
+
   let source = await heroku.post('/sources')
-  await compressSource(context, dir, tempFilePath)
+
   await cli.got.put(source.source_blob.put_url, {
-    body: fs.createReadStream(tempFilePath),
+    body: fs.createReadStream(filePath),
     headers: {
       'Content-Type': '',
-      'Content-Length': fs.statSync(tempFilePath).size
+      'Content-Length': fs.statSync(filePath).size
     }
   })
   return source.source_blob.get_url
@@ -59,9 +67,12 @@ async function uploadDirToSource (context, heroku, dir) {
 
 async function create (context, heroku) {
   let sourceUrl = context.flags['source-url']
+  let sourceTar = context.flags['source-tar']
   let dir = context.flags.dir || process.cwd()
 
-  if (!sourceUrl) {
+  if (sourceTar) {
+    sourceUrl = await uploadDirToSource(context, heroku, sourceTar)
+  } else if (!sourceUrl) {
     sourceUrl = await uploadDirToSource(context, heroku, dir)
   }
 
@@ -91,6 +102,7 @@ module.exports = {
   help: 'Create build from contents of current dir',
   description: 'create build',
   flags: [
+    { name: 'source-tar', description: 'local path to source to the tarball of your application\'s source code', hasValue: true },
     { name: 'source-url', description: 'source URL that points to the tarball of your application\'s source code', hasValue: true },
     { name: 'dir', description: 'the local path to build. Defaults to the current working directory', hasValue: true },
     { name: 'tar', description: 'path to the executable GNU tar', hasValue: true },
