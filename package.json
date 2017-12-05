@@ -1,6 +1,6 @@
 {
   "name": "heroku-builds",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Heroku CLI plugin to list and create builds for Heroku apps",
   "main": "index.js",
   "repository": {
