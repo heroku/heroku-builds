@@ -9,8 +9,8 @@ module.exports = {
   command: 'output',
   needsAuth: true,
   needsApp: true,
-  description: 'show build output',
-  help: 'Show build output for a Heroku app',
+  description: 'show build output. Omit ID to get latest build.',
+  help: 'Show build output for a Heroku app. Omit ID or use "current" in place of an ID to get the output for the latest build.',
   args: [
     {
       name: 'id',
