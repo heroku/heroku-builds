@@ -19,7 +19,7 @@ describe('builds:output', function () {
     let api = nock('https://api.heroku.com:443')
       .get('/apps/myapp/builds/build_id')
       .reply(200, { output_stream_url: 'https://busl.test/streams/build.log' })
-    return cmd.run({app: 'myapp', args: {id: 'build_id'}})
+    return cmd.run({app: 'myapp', args: {build: 'build_id'}})
       .then(() => expect(stdMocks.flush().stdout.join('')).to.equal('Build Content'))
       .then(() => expect(cli.stderr).to.equal(''))
       .then(() => busl.done())
