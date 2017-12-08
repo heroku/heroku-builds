@@ -39,6 +39,30 @@ describe('builds info', () => {
     }
   }
 
+  const failedBuild = {
+    'app': {
+      'id': 'app_uuid'
+    },
+    'buildpacks': [],
+    'created_at': '2016-08-08T08:46:40Z',
+    'id': 'build_uuid',
+    'output_stream_url': 'https://example.com',
+    'release': null,
+    'slug': null,
+    'source_blob': {
+      'checksum': 'SHA256:3e46dfa5cc27b79b5aab6fa054775915b65b9709e4167ac508a7684445de493a',
+      'url': 'https://example.com/source_blob.tar.gz',
+      'version': 'succeeded_blob_version',
+      'version_description': ''
+    },
+    'status': 'failed',
+    'updated_at': '2016-08-08T08:46:55Z',
+    'user': {
+      'email': 'damien@heroku.com',
+      'id': 'user_uuid'
+    }
+  }
+
   it('shows build info in json', () => {
     process.stdout.columns = 80
     let api = nock('https://api.heroku.com:443')
@@ -63,6 +87,21 @@ Buildpacks: https://example.com/buildpack.tgz
 By:         damien@heroku.com
 Release:    v42
 Status:     succeeded
+When:       2016-08-08T08:46:40Z
+`))
+      .then(() => expect(cli.stderr, 'to be empty'))
+      .then(() => api.done())
+  })
+
+  it('shows a failed build info', () => {
+    process.stdout.columns = 80
+    let api = nock('https://api.heroku.com:443')
+      .get('/apps/myapp/builds')
+      .reply(200, [failedBuild])
+    return cmd.run({app: 'myapp', args: {}, flags: {}})
+      .then(() => expect(cli.stdout, 'to equal', `=== Build build_uuid
+By:         damien@heroku.com
+Status:     failed
 When:       2016-08-08T08:46:40Z
 `))
       .then(() => expect(cli.stderr, 'to be empty'))
