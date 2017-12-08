@@ -9,11 +9,11 @@ module.exports = {
   command: 'output',
   needsAuth: true,
   needsApp: true,
-  description: 'show build output. Omit ID to get latest build.',
-  help: 'Show build output for a Heroku app. Omit ID or use "current" in place of an ID to get the output for the latest build.',
+  description: 'show build output. Omit BUILD to get latest build.',
+  help: 'Show build output for a Heroku app. Omit BUILD or use "current" in place of an BUILD to get the output for the latest build.',
   args: [
     {
-      name: 'id',
+      name: 'build',
       optional: true,
       hidden: false
     }
@@ -22,7 +22,7 @@ module.exports = {
 }
 
 function * run (context, heroku) {
-  let build = yield builds.FindByLatestOrId(heroku, context.app, context.args.id)
+  let build = yield builds.FindByLatestOrId(heroku, context.app, context.args.build)
 
   return new Promise(function (resolve, reject) {
     let stream = cli.got.stream(build.output_stream_url)
