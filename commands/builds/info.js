@@ -10,16 +10,20 @@ function * run (context, heroku) {
   if (context.flags.json) {
     cli.styledJSON(build)
   } else {
-    let release = yield heroku.get(`/apps/${context.app}/releases/${build.release.id}`)
-
     cli.styledHeader(`Build ${cli.color[builds.StatusColor(build.status)](build.id)}`)
-    cli.styledObject({
+    let data = {
       By: build.user.email,
       When: build.created_at,
       Status: build.status,
-      Buildpacks: build.buildpacks.map((e) => e.url),
-      Release: `v${release.version}`
-    })
+      Buildpacks: build.buildpacks.map((e) => e.url)
+    }
+
+    if (build.release) {
+      let release = yield heroku.get(`/apps/${context.app}/releases/${build.release.id}`)
+      data['Release'] = `v${release.version}`
+    }
+
+    cli.styledObject(data)
   }
 }
 
