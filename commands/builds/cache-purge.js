@@ -28,5 +28,8 @@ module.exports = {
   description: 'purge the build cache for the specified app',
   needsApp: true,
   needsAuth: true,
+  flags: [
+    {name: 'confirm', char: 'c', hasValue: true}
+  ],
   run: cli.command(co.wrap(run))
 }
