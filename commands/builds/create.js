@@ -25,11 +25,13 @@ function compressSource (context, dir, tempFile) {
 
     if (tarVersion.match(/GNU tar/)) {
       let includeVcsIgnore = context.flags['include-vcs-ignore']
-      let command = tar + ' cz -C ' + dir + ' --exclude .git --exclude .gitmodules .'
+      let command = tar + ' cz -C ' + dir
 
       if (!includeVcsIgnore) {
         command += ' --exclude-vcs-ignores'
       }
+      command += ' --exclude .git --exclude .gitmodules'
+      command += ' .'
 
       exec(command + ' > ' + tempFile)
       resolve()
