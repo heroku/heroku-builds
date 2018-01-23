@@ -10,7 +10,7 @@ module.exports = {
   needsAuth: true,
   needsApp: true,
   description: 'show build output. Omit BUILD to get latest build.',
-  help: 'Show build output for a Heroku app. Omit BUILD or use "current" in place of an BUILD to get the output for the latest build.',
+  help: 'Show build output for a Heroku app. Omit BUILD to get the output for the latest build.',
   args: [
     {
       name: 'build',
