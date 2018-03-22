@@ -78,7 +78,7 @@ async function create (context, heroku) {
     sourceUrl = await uploadDirToSource(context, heroku, dir)
   }
 
-  let build = await heroku.post(`/apps/${context.app}/builds`, {
+  let newBuild = await heroku.post(`/apps/${context.app}/builds`, {
     body: {
       source_blob: {
         url: sourceUrl,
@@ -88,12 +88,17 @@ async function create (context, heroku) {
     }
   })
 
-  return new Promise((resolve, reject) => {
-    let stream = cli.got.stream(build.output_stream_url)
+  await new Promise((resolve, reject) => {
+    let stream = cli.got.stream(newBuild.output_stream_url)
     stream.on('error', reject)
     stream.on('end', resolve)
     stream.pipe(process.stderr)
   })
+
+  let build = await heroku.get(`/apps/${context.app}/builds/${newBuild.id}`)
+  if (build.status === 'failed') {
+    cli.exit(1, 'Build failed')
+  }
 }
 
 module.exports = {
