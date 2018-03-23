@@ -3,10 +3,14 @@
 const cli = require('heroku-cli-util')
 const nock = require('nock')
 const cmd = require('../../../commands/builds/create')
+const assertExit = require('../../assert_exit.js')
 const expect = require('unexpected')
 
 describe('builds create', () => {
-  beforeEach(() => cli.mockConsole())
+  beforeEach(() => {
+    cli.mockConsole()
+    cli.exit.mock()
+  })
 
   const source = {
     source_blob: {
@@ -39,11 +43,15 @@ describe('builds create', () => {
     }
   }
 
-  function buildMocks (urlBuild) {
+  function buildMocks (urlBuild, buildData) {
     let busl = nock('https://busl.test:443')
       .get('/streams/build.log')
       .reply(200, 'Streamed Build Output')
     let api = nock('https://api.heroku.com:443')
+      .post('/apps/myapp/builds')
+      .reply(200, buildData || build)
+      .get('/apps/myapp/builds/build_uuid')
+      .reply(200, buildData || build)
 
     if (!urlBuild) {
       api.post('/sources')
@@ -51,9 +59,6 @@ describe('builds create', () => {
         .put('/sources/1234.tgz')
         .reply(200)
     }
-
-    api.post('/apps/myapp/builds')
-      .reply(200, build)
 
     return {busl, api}
   }
@@ -100,5 +105,18 @@ describe('builds create', () => {
       .then(() => expect(cli.stdout, 'to be empty'))
       .then(() => mocks.api.done())
       .then(() => mocks.busl.done())
+  })
+
+  it('exits with an error on a failed build', () => {
+    let failedBuild = build
+    failedBuild.status = 'failed'
+    let mocks = buildMocks(false, failedBuild)
+    process.stdout.columns = 80
+
+    return assertExit(1, cmd.run({app: 'myapp', flags: {dir: process.cwd() + '/test', 'include-vcs-ignore': true}})
+      .then(() => expect(cli.stdout, 'to be empty'))
+      .then(() => mocks.api.done())
+      .then(() => mocks.busl.done())
+    )
   })
 })
