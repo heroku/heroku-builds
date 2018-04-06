@@ -72,7 +72,7 @@ To view the output for a specific build:
 
 Clears the build cache, used by buildpacks to store information across builds
 
-### Cancel Build
+### Cancel build
 
     heroku builds -a example-app # take note of the build ID you'd want to display
     heroku builds:cancel <id> -a example-app
