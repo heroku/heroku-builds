@@ -39,6 +39,11 @@
     "tmp": "0.x",
     "unexpected": "10.25.0"
   },
+  "files": [
+    "/index.js",
+    "/commands",
+    "/lib"
+  ],
   "standard": {
     "env": "mocha"
   }
