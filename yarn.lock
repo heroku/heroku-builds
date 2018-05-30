@@ -1085,13 +1085,13 @@ htmlparser2@3.8.x:
     entities "1.0"
     readable-stream "1.1"
 
-ignore@3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.1.2.tgz#dd17765e9233b4019762ba82b892202b0980161b"
-
 ignore@^3.0.9, ignore@^3.2.0:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.3.tgz#432352e57accd87ab3110e82d3fea0e47812156d"
+
+"ignore@~ 3.3.8":
+  version "3.3.8"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.8.tgz#3f8e9c35d38708a3a7e0e9abb6c73e7ee7707b2b"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
