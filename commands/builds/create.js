@@ -2,7 +2,7 @@
 
 let cli = require('heroku-cli-util')
 let fs = require('fs')
-let uuid = require('node-uuid')
+let uuid = require('uuid/v4')
 let os = require('os')
 let path = require('path')
 let exec = require('child_process').execSync
@@ -49,7 +49,7 @@ async function uploadDirToSource (context, heroku, tarPath) {
   let filePath
 
   if (fs.statSync(tarPath).isDirectory()) {
-    filePath = path.join(os.tmpdir(), uuid.v4() + '.tar.gz')
+    filePath = path.join(os.tmpdir(), uuid() + '.tar.gz')
     await compressSource(context, tarPath, filePath)
   } else {
     filePath = tarPath
