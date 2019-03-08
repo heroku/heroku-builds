@@ -10,39 +10,39 @@ Heroku CLI plugin to list and create builds for Heroku apps.
 
 ### List builds
 
-Lists 10 most recently created builds for `example-app`
+Lists 10 most recently created builds for`zdbhapp`
 
-    heroku builds -a example-app
+    heroku builds -a zdbhapp
 
 Optionally show more builds with the `-n` flag:
 
-    heroku builds -n 50 -a example-app
+    heroku builds -n 50 -a zdbhapp
 
 ### Build info
 
 Show details of the latest build (status, buildpacks, date):
 
-    heroku builds:info -a example-app
+    heroku builds:info -a zdbhapp
 
 For details of a specific build, provide an ID:
 
-    heroku builds:info <id> -a example-app
+    heroku builds:info <id> -a zdbhapp
 
 ### Create build from local dir
 
-    heroku builds:create -a example-app
+    heroku builds:create -a zdbhapp
 
 Creates a `.tar.gz` archive from the current working directory, uploads the archive to Heroku and creates a build from the contents of the archive. Build output is streamed to `stderr`. Hitting ctrl+c will not cancel the build and release. The `.git` directory (if present) is excluded from the upload, as are items matching entries in the `.gitignore` file (if present).
 
 You can pass an optional `--version` argument in lieu of a git commit messages. Example:
 
-    heroku builds:create --version "added foo feature" -a example-app
+    heroku builds:create --version "added foo feature" -a zdbhapp
 
 ### Create build from tarball URL
 
 If you pass a `--source-url` argument to the `create` command, a build will be created from the contents of a tarball found at the URL. The current working directory contents is not used. Example:
 
-    heroku builds:create --source-url https://github.com/heroku/node-js-sample/archive/master.tar.gz -a example-app
+    heroku builds:create --source-url https://github.com/heroku/node-js-sample/archive/master.tar.gz -a zdbhapp
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
 
@@ -50,7 +50,7 @@ As above, build output is streamed to `stderr` and an optional `--version` argum
 
 If you pass a `--source-tar` argument to the `create` command, a build will be created from the contents of a tarball found at the path given. The current working directory contents is not used. Example:
 
-    heroku builds:create --source-tar master.tar.gz -a example-app
+    heroku builds:create --source-tar master.tar.gz -a zdbhapp
 
 As above, build output is streamed to `stderr` and an optional `--version` argument is supported.
 
@@ -58,24 +58,24 @@ As above, build output is streamed to `stderr` and an optional `--version` argum
 
 For the latest build output on an app, use either of the following:
 
-    heroku builds:output -a example-app
-    heroku builds:output current -a example-app
+    heroku builds:output -a zdbhapp
+    heroku builds:output current -a zdbhapp
 
 To view the output for a specific build:
 
     heroku builds -a example-app # take note of the build ID you'd want to display
-    heroku builds:output <id> -a example-app
+    heroku builds:output <id> -a zdbhapp
 
 ### Purge build cache
 
-    heroku builds:cache:purge -a example-app
+    heroku builds:cache:purge -a zdbhapp
 
 Clears the build cache, used by buildpacks to store information across builds
 
 ### Cancel build
 
-    heroku builds -a example-app # take note of the build ID you'd want to display
-    heroku builds:cancel <id> -a example-app
+    heroku builds -a zdbhapp # take note of the build ID you'd want to display
+    heroku builds:cancel <id> -a zdbhapp
 
 Cancels the build for build <id>
 
