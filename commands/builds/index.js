@@ -20,7 +20,7 @@ function * run (context, heroku) {
       {label: 'ID', key: 'id', format: (t) => t},
       {label: 'Source Version', key: 'source_blob.version', format: (v) => v},
       {label: 'Created At', key: 'created_at', format: (t) => time.ago(new Date(t))},
-      {label: 'Duration', format: (_,t) => time.duration(new Date(t.created_at).getTime(), new Date(t.updated_at).getTime())},
+      {label: 'Duration', format: (_, t) => time.duration(new Date(t.created_at).getTime(), new Date(t.updated_at).getTime())},
       {label: 'Status', key: 'status', format: (s) => cli.color[builds.StatusColor(s)](s)},
       {label: 'User', key: 'user', format: (u) => cli.color.magenta(u.email.replace(/@addons\.heroku\.com$/, ''))}
     ]
