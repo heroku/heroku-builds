@@ -22,10 +22,10 @@
   "dependencies": {
     "archiver": "1.0.0",
     "columnify": "1.5.4",
-    "heroku-cli-util": "6.1.17",
+    "heroku-cli-util": "8.0.11",
     "ignore": "~ 3.3.8",
-    "uuid": "~ 3.2.1",
-    "strftime": "0.10.0"
+    "strftime": "0.10.0",
+    "uuid": "~ 3.2.1"
   },
   "devDependencies": {
     "jshint": "*",

@@ -80,8 +80,10 @@ describe('builds index', () => {
       .reply(200, builds)
     return cmd.run({app: 'myapp', flags: {}})
       .then(() => expect(cli.stdout, 'to equal', `=== myapp Builds
-build_uuid  2016/08/08 08:46:40 +0000  succeeded_blob_version  damien@heroku.com
-build_uuid  2016/08/08 08:46:40 +0000  failed_blob_version     damien@heroku.com
+ID          Source Version          Created At                 Duration  Status     User
+──────────  ──────────────────────  ─────────────────────────  ────────  ─────────  ─────────────────
+build_uuid  succeeded_blob_version  2016/08/08 08:46:40 +0000  15s       succeeded  damien@heroku.com
+build_uuid  failed_blob_version     2016/08/08 08:46:40 +0000  15s       failed     damien@heroku.com
 `))
       .then(() => expect(cli.stderr, 'to be empty'))
       .then(() => api.done())
