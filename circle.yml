@@ -9,4 +9,4 @@ test:
     - nyc mocha test
     - standard
   post:
-    - nyc report --reporter=text-lcov > coverage.lcov && bash <(curl -s https://codecov.io/bash)
+    - nyc report --reporter=text-lcov > coverage.lcov
