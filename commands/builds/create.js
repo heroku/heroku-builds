@@ -114,7 +114,7 @@ module.exports = {
     { name: 'dir', description: 'the local path to build. Defaults to the current working directory', hasValue: true },
     { name: 'tar', description: 'path to the executable GNU tar', hasValue: true },
     { name: 'version', description: 'description of your new build', hasValue: true },
-    { name: 'include-vcs-ignore', description: 'include files ignores by VCS (.gitignore, ...) from the build' }
+    { name: 'include-vcs-ignore', description: 'include files ignored by VCS (.gitignore, ...) from the build' }
   ],
   run: cli.command(create)
 }
