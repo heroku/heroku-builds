@@ -2,7 +2,7 @@
 
 let cli = require('heroku-cli-util')
 let fs = require('fs')
-let uuid = require('uuid/v4')
+let uuid = require('uuid').v4;
 let os = require('os')
 let path = require('path')
 let exec = require('child_process').execSync
