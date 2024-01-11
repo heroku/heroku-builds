@@ -1,5 +1,5 @@
 {
-  "name": "heroku-builds",
+  "name": "@heroku-cli/heroku-builds",
   "version": "0.0.29",
   "description": "Heroku CLI plugin to list and create builds for Heroku apps",
   "main": "index.js",
@@ -10,7 +10,7 @@
   "keywords": [
     "heroku-plugin"
   ],
-  "author": "Michael Friis (@friism)",
+  "author": "Heroku",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/heroku/heroku-build/issues"
