@@ -2000,7 +2000,7 @@ lodash.keys@^3.0.0:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.11.1, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.8.0, lodash@~4.17.11, lodash@~4.17.2:
+lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.8.0, lodash@~4.17.11, lodash@~4.17.2:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -2910,12 +2910,10 @@ standard@8.6.0:
     eslint-plugin-standard "~2.0.1"
     standard-engine "~5.2.0"
 
-std-mocks@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/std-mocks/-/std-mocks-1.0.1.tgz#d3388876d7beeba3c70fbd8e2bcaf46eb07d79fe"
-  integrity sha1-0ziIdte+66PHD72OK8r0brB9ef4=
-  dependencies:
-    lodash "^4.11.1"
+std-mocks@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/std-mocks/-/std-mocks-2.0.0.tgz#ddecd9faef29df36f895a72bfeea2547e42dd286"
+  integrity sha512-R1GZfUZ+ceyMcLP8uEqIcANzPCJHKcOjYzBHziP8vN0XTrfGmIl5IaA5gVtcy3VGewwLFD7oqzgOf0VMU3leDQ==
 
 strftime@0.10.0:
   version "0.10.0"
