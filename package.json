@@ -25,7 +25,7 @@
     "heroku-cli-util": "8.0.11",
     "ignore": "~ 5.3.1",
     "strftime": "0.10.0",
-    "uuid": "~ 3.2.1"
+    "uuid": "~ 9.0.0"
   },
   "devDependencies": {
     "jshint": "*",
