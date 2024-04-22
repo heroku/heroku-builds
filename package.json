@@ -24,7 +24,7 @@
     "columnify": "1.5.4",
     "heroku-cli-util": "8.0.11",
     "ignore": "~ 5.3.1",
-    "strftime": "0.10.0",
+    "strftime": "0.10.2",
     "uuid": "~ 3.2.1"
   },
   "devDependencies": {
