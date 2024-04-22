@@ -157,17 +157,17 @@ arr-flatten@^1.0.1:
   resolved "https://registry.yarnpkg.com/arr-flatten/-/arr-flatten-1.1.0.tgz#36048bbff4e7b47e136644316c99669ea5ae91f1"
   integrity sha512-L3hKV5R/p5o81R7O02IGnwpDmkp6E982XhtbuwSe3O4qOtMMMtodicASA1Cny2U+aCXcNpml+m4dPsvsJ3jatg==
 
-array-changes-async@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/array-changes-async/-/array-changes-async-3.0.0.tgz#79b6ee0ce5a9277f9ae3f42aefbde7ef7bc34393"
-  integrity sha1-ebbuDOWpJ3+a4/Qq773n73vDQ5M=
+array-changes-async@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/array-changes-async/-/array-changes-async-3.0.1.tgz#7103962ae9d954be12e3f0d844e1ac7021f65688"
+  integrity sha512-WNHLhMOTzntixkBxNm/MiWCNKuC4FMYXk6DKuzZUbkWXAe0Xomwv40SEUicfOuHHtW7Ue661Mc5AJA0AOfqApg==
   dependencies:
     arraydiff-async "0.2.0"
 
-array-changes@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/array-changes/-/array-changes-2.0.0.tgz#457baa3303c2de16fbbee348ca2ccb2ce70078a9"
-  integrity sha1-RXuqMwPC3hb7vuNIyizLLOcAeKk=
+array-changes@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/array-changes/-/array-changes-3.0.1.tgz#691aab4eb9fc6ae400446f1b0257cdb0fdd35dd6"
+  integrity sha512-UYXV+qUaTKJO3GUBVfD6b9Mu7wUzDvpfovZKtbxNJApwRUifgrJMidvE+/rbqV3wCffly5HXcbOW3/7shmmEag==
   dependencies:
     arraydiff-papandreou "0.1.1-patch1"
 
@@ -774,15 +774,15 @@ detect-indent@^4.0.0:
   dependencies:
     repeating "^2.0.0"
 
-diff@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-1.1.0.tgz#798a49381aa464151e9b4f0e6ff2b09a8a1ad23f"
-  integrity sha1-eYpJOBqkZBUem08Ob/Kwmooa0j8=
-
 diff@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-1.4.0.tgz#7f28d2eb9ee7b15a97efd89ce63dcfdaa3ccbabf"
   integrity sha1-fyjS657nsVqX79ic5j3P2qPMur8=
+
+diff@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-5.2.0.tgz#26ded047cd1179b78b9537d5ef725503ce1ae531"
+  integrity sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A==
 
 doctrine@^1.2.2:
   version "1.5.0"
@@ -1925,11 +1925,6 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-leven@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/leven/-/leven-2.0.0.tgz#74c45744439550da185801912829f61d22071bc1"
-  integrity sha1-dMRXREOVUNoYWAGRKCn2HSIHG8E=
-
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"
@@ -2035,14 +2030,13 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-magicpen@5.10.0:
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/magicpen/-/magicpen-5.10.0.tgz#be8aa4bc5d6936d9bd2876d08f8fa11d894b33cd"
-  integrity sha1-voqkvF1pNtm9KHbQj4+hHYlLM80=
+magicpen@^6.2.4:
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/magicpen/-/magicpen-6.2.4.tgz#9ee059a48c2ea1f4e224239710be573de9fb4d71"
+  integrity sha512-rT4JcgakSrmR9/qPY/EsDSvKH4+nQuFfSQ34Djnj0Zx9jJ+c3REOz+K3CITvRZcmAcCFM6jJO7wSiHlMEXYy3A==
   dependencies:
     ansi-styles "2.0.0"
     color-diff "0.1.7"
-    supports-color "1.2.0"
 
 math-random@^1.0.1:
   version "1.0.4"
@@ -3009,11 +3003,6 @@ strip-json-comments@1.0.x, strip-json-comments@~1.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-1.0.4.tgz#1e15fbcac97d3ee99bf2d73b4c656b082bbafb91"
   integrity sha1-HhX7ysl9Pumb8tc7TGVrCCu6+5E=
 
-supports-color@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-1.2.0.tgz#ff1ed1e61169d06b3cf2d588e188b18d8847e17e"
-  integrity sha1-/x7R5hFp0Gs88tWI4YixjYhH4X4=
-
 supports-color@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-3.1.2.tgz#72a262894d9d408b956ca05ff37b2ed8a6e2a2d5"
@@ -3162,23 +3151,28 @@ uglify-js@^3.1.4:
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.14.1.tgz#e2cb9fe34db9cb4cf7e35d1d26dfea28e09a7d06"
   integrity sha512-JhS3hmcVaXlp/xSo3PKY5R0JqKs5M3IV+exdLHW99qKvKivPO4Z8qbej6mte17SOPqAOVMjt/XGgWacnFSzM3g==
 
+ukkonen@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ukkonen/-/ukkonen-2.1.0.tgz#7af741397e603462290aa5d4e65e514f400b29f7"
+  integrity sha512-unACtiJBMpL5Q+JKEBYtB88DVClP4Ch42NFkuj7Ck7jcJ4UKkkfvvfGQ2WeaMeuq7OIGLkbm0X7YN+TGP9C5bw==
+
 unexpected-bluebird@2.9.34-longstack2:
   version "2.9.34-longstack2"
   resolved "https://registry.yarnpkg.com/unexpected-bluebird/-/unexpected-bluebird-2.9.34-longstack2.tgz#49acac753b0556ded6025210ee96182307d2b2c9"
   integrity sha1-SaysdTsFVt7WAlIQ7pYYIwfSssk=
 
-unexpected@10.25.0:
-  version "10.25.0"
-  resolved "https://registry.yarnpkg.com/unexpected/-/unexpected-10.25.0.tgz#90c809d12ebe0df9052d2a4ae4cf7706fdb7efe8"
-  integrity sha1-kMgJ0S6+DfkFLSpK5M93Bv237+g=
+unexpected@13.2.1:
+  version "13.2.1"
+  resolved "https://registry.yarnpkg.com/unexpected/-/unexpected-13.2.1.tgz#d21d0dcc633e0ff00754ebdcf6925ac3f9c66799"
+  integrity sha512-6rWjexbMV4DICp8xeKHKql5JTC5No7Mz55wei2YcXGkqBAtAgfzIhFLzbDohRzN/lNtwG6+NuIvMI/0giQXOvA==
   dependencies:
-    array-changes "2.0.0"
-    array-changes-async "3.0.0"
+    array-changes "3.0.1"
+    array-changes-async "3.0.1"
     detect-indent "3.0.1"
-    diff "1.1.0"
+    diff "^5.0.0"
     greedy-interval-packer "1.2.0"
-    leven "2.0.0"
-    magicpen "5.10.0"
+    magicpen "^6.2.4"
+    ukkonen "^2.1.0"
     unexpected-bluebird "2.9.34-longstack2"
 
 uniq@^1.0.1:

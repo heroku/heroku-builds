@@ -37,7 +37,7 @@
     "standard": "8.6.0",
     "std-mocks": "2.0.0",
     "tmp": "0.x",
-    "unexpected": "10.25.0"
+    "unexpected": "13.2.1"
   },
   "files": [
     "/index.js",
