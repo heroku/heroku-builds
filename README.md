@@ -6,11 +6,11 @@ Heroku CLI plugin to list and create builds for Heroku apps.
 
 ### Installation
 
-    heroku plugins:install heroku-builds
+    heroku plugins:install @heroku-cli/heroku-builds
 
 ### List builds
 
-Lists 10 most recently created builds for `example-app`
+Lists 15 most recently created builds for `example-app`
 
     heroku builds -a example-app
 

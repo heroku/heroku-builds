@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "importHelpers": true,
+    "module": "NodeNext",
+    "outDir": "dist",
+    "rootDirs": ["src"],
+    "strict": true,
+    "target": "esnext",
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
