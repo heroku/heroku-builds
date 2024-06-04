@@ -62,7 +62,7 @@
     "oclif": "^4.10.5",
     "sinon": "^7.3.2",
     "ts-node": "10.x",
-    "typescript": "4.x"
+    "typescript": "5.x"
   },
   "files": [
     "/dist"
