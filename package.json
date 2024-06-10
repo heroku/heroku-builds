@@ -41,7 +41,7 @@
     "tar": "^7.1.0"
   },
   "devDependencies": {
-    "@oclif/test": "^2.3.28",
+    "@oclif/test": "^3.2.15",
     "@oclif/plugin-help": "^6.0.21",
     "@types/mocha": "^10.0.6",
     "@types/node": "16.11.7",
