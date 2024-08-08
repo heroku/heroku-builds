@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 16.x ]
-        os: [ pub-hk-ubuntu-22.04-small, pub-hk-ubuntu-22.04-arm-large ]
+        os: [ ubuntu-24.04, pub-hk-ubuntu-24.04-arm-small ]
 
     steps:
       - uses: actions/checkout@v3
