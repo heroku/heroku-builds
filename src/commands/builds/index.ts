@@ -20,6 +20,7 @@ export default class Index extends Command {
     const {flags} = await this.parse(Index)
     const {app, num} = flags
     const {body: builds} = await this.heroku.get<Heroku.Build[]>(`/apps/${app}/builds`, {
+      partial: true,
       headers: {Range: `created_at ..; max=${num || 15}, order=desc`},
     })
     ux.styledHeader(`${app} Builds`)
