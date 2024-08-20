@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+/* eslint-disable node/shebang */
+
+const oclif = require('@oclif/core')
+oclif.run().then(require('@oclif/core/flush')).catch(async error => {
+  return require('@oclif/core/handle')(error)
+})
