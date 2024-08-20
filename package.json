@@ -60,7 +60,7 @@
     "nock": "^13",
     "nyc": "^15.1.0",
     "oclif": "2.2.0",
-    "sinon": "^14",
+    "sinon": "^18",
     "stdout-stderr": "^0",
     "tmp": "^0.2.3",
     "ts-node": "^10",
