@@ -59,7 +59,7 @@
     "mockdate": "3.0.5",
     "nock": "^13",
     "nyc": "^15.1.0",
-    "oclif": "2.2.0",
+    "oclif": "4.14.22",
     "sinon": "^14",
     "stdout-stderr": "^0",
     "tmp": "^0.2.3",
