@@ -43,7 +43,7 @@
     "tsheredoc": "^1.0.1"
   },
   "devDependencies": {
-    "@oclif/test": "^2.3.28",
+    "@oclif/test": "^3.2.15",
     "@types/mocha": "^10",
     "@types/nock": "^10.0.3",
     "@types/node": "^16",
