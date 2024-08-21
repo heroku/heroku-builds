@@ -4,7 +4,7 @@
   "description": "Heroku CLI plugin to list and create builds for Heroku apps",
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/heroku-build.git"
+    "url": "https://github.com/heroku/heroku-builds.git"
   },
   "engines": {
     "node": "~16.20.0"
@@ -15,9 +15,9 @@
   "author": "Heroku",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/heroku/heroku-build/issues"
+    "url": "https://github.com/heroku/heroku-builds/issues"
   },
-  "homepage": "https://github.com/heroku/heroku-build",
+  "homepage": "https://github.com/heroku/heroku-builds",
   "scripts": {
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md",
