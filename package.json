@@ -21,13 +21,14 @@
   "scripts": {
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md",
-    "build": "rm -rf dist && tsc -b && oclif manifest && oclif readme && mv oclif.manifest.json ./dist/oclif.manifest.json && cp README.md ./dist/README.md && node scripts/prepack.mjs"
+    "build": "rm -rf dist && tsc -b && oclif manifest"
   },
   "oclif": {
     "commands": "./dist/commands",
     "bin": "heroku",
     "devPlugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
     ]
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "@heroku-cli/command": "^11.0.0",
     "@heroku-cli/schema": "^1.0.25",
     "@oclif/core": "^2.16.0",
+    "@oclif/plugin-plugins": "^3.0.0",
     "@oclif/plugin-help": "^5",
     "http-call": "^5.3.0",
     "ignore": "~ 5.3.1",
@@ -67,6 +69,8 @@
     "typescript": "^5"
   },
   "files": [
-    "/dist"
+    "/bin",
+    "/dist",
+    "/oclif.manifest.json"
   ]
 }
