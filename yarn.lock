@@ -400,10 +400,10 @@
     supports-color "^7.2.0"
     tslib "^1.9.3"
 
-"@heroku-cli/command@^11.3.0":
-  version "11.3.0"
-  resolved "https://registry.yarnpkg.com/@heroku-cli/command/-/command-11.3.0.tgz#b375abc27f9a4267ca03dfad90f72780e3cc20f3"
-  integrity sha512-y4OqxwQsIok3lDr5Ypd2lnA1ODvdf4DRXW+toS2jIwDwKmR9gl/TKpJDMUMvAq6pyDMkhLUKcUiAktL+3QeHBw==
+"@heroku-cli/command@^11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@heroku-cli/command/-/command-11.3.1.tgz#74671ee8149d31cc5beb0e7e8e369fe2dd7aeac2"
+  integrity sha512-n3+KgMmXScZDVEQu76mffzOJoQ5JyRYzzJ7uj3cNyAOK61xjaS1wEE86DBb57C1MlnjKtO7onJETBm2SMLdUIQ==
   dependencies:
     "@heroku-cli/color" "^2.0.1"
     "@oclif/core" "^2.16.0"
@@ -415,6 +415,8 @@
     netrc-parser "^3.1.6"
     open "^8.4.2"
     uuid "^8.3.0"
+    yargs-parser "^18.1.3"
+    yargs-unparser "^2.0.0"
 
 "@heroku-cli/schema@^1.0.25":
   version "1.0.25"
@@ -6195,9 +6197,9 @@ yargs-parser@20.2.4:
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.4.tgz#b42890f14566796f85ae8e3a25290d205f154a54"
   integrity sha512-WOkpgNhPTlE73h4VFAFsOnomJVaovO8VqLDzy5saChRBFQFBoMYirowyW+Q9HB4HFF4Z7VZTiG3iSzJJA29yRA==
 
-yargs-parser@^18.1.2:
+yargs-parser@^18.1.2, yargs-parser@^18.1.3:
   version "18.1.3"
-  resolved "https://registry.npmjs.org/yargs-parser/-/yargs-parser-18.1.3.tgz"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
   integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
   dependencies:
     camelcase "^5.0.0"
@@ -6208,7 +6210,7 @@ yargs-parser@^20.2.2:
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.9.tgz#2eb7dc3b0289718fc295f362753845c41a0c94ee"
   integrity sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==
 
-yargs-unparser@2.0.0:
+yargs-unparser@2.0.0, yargs-unparser@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yargs-unparser/-/yargs-unparser-2.0.0.tgz#f131f9226911ae5d9ad38c432fe809366c2325eb"
   integrity sha512-7pRTIA9Qc1caZ0bZ6RYRGbHJthJWuakf+WmHK0rVeLkNrrGhfoabBNdue6kdINI6r4if7ocq9aD/n7xwKOdzOA==
