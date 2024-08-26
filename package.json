@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "2.4.7",
+    "@oclif/plugin-plugins": "5.4.6",
     "@oclif/test": "^2.3.28",
     "@types/mocha": "^10",
     "@types/nock": "^10.0.3",
