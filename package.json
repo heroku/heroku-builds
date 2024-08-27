@@ -7,7 +7,7 @@
     "url": "https://github.com/heroku/heroku-builds.git"
   },
   "engines": {
-    "node": "~16.20.0"
+    "node": ">= 16.20.0"
   },
   "keywords": [
     "heroku-plugin"
@@ -71,7 +71,6 @@
   "files": [
     "/bin",
     "/dist",
-    "/oclif.manifest.json",
-    "/yarn.lock"
+    "/oclif.manifest.json"
   ]
 }
