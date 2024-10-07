@@ -5444,10 +5444,10 @@ stdout-stderr@^0, stdout-stderr@^0.1.9:
     debug "^4.1.1"
     strip-ansi "^6.0.0"
 
-strftime@0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/strftime/-/strftime-0.10.0.tgz#b3f0fa419295202a5a289f6d6be9f4909a617193"
-  integrity sha512-e2g0IjCwjjK4dsaR8/uPUTzk58xYBdUVxdElyzHCsL1WVsfc2O0JY8BeC7Cdd7t7oGdubBQkXwbD2jxXZXlBGw==
+strftime@0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/strftime/-/strftime-0.10.3.tgz#d801427a07f794c1e16a622371efe660fa72123f"
+  integrity sha512-DZrDUeIF73eKJ4/GgGuv8UHWcUQPYDYfDeQFj3jrx+JZl6GQE656MbHIpvbo4mEG9a5DgS8GRCc5DxJXD2udDQ==
 
 string-template@~0.2.1:
   version "0.2.1"
