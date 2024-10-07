@@ -45,7 +45,7 @@
   "devDependencies": {
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "2.4.7",
-    "@oclif/test": "^2.3.28",
+    "@oclif/test": "^3.2.15",
     "@types/mocha": "^10",
     "@types/nock": "^10.0.3",
     "@types/node": "^16",
