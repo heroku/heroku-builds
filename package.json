@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "@heroku-cli/color": "2.0.3",
-    "@heroku-cli/command": "^11.3.1",
+    "@heroku-cli/command": "^11.4.0",
     "@heroku-cli/schema": "^1.0.25",
     "@oclif/core": "^2.16.0",
-    "http-call": "^5.3.0",
+    "@heroku/http-call": "^5.4.0",
     "ignore": "~ 5.3.1",
     "strftime": "0.10.3",
     "tar": "~6.2.1",

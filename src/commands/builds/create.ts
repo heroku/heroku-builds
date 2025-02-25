@@ -1,7 +1,7 @@
 import {APIClient, Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
 import {ux} from '@oclif/core'
-import HTTP from 'http-call'
+import HTTP from '@heroku/http-call'
 import {exec} from 'node:child_process'
 import {randomUUID} from 'node:crypto'
 import {createReadStream, statSync} from 'node:fs'

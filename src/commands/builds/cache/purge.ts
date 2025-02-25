@@ -1,6 +1,7 @@
 import {color} from '@heroku-cli/color'
 import {Command, flags} from '@heroku-cli/command'
 import {ux} from '@oclif/core'
+
 import confirmCommand from '../../../lib/confirm-command'
 
 import util = require('util')
@@ -26,7 +27,7 @@ export default class Purge extends Command {
     } catch (error) {
       const {name} = error as Error
       // These occur with 202's from this endpoint for some reason.
-      if (name !== 'JSONError') {
+      if (name !== 'SyntaxError') {
         throw error
       }
     }

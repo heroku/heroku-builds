@@ -400,18 +400,18 @@
     supports-color "^7.2.0"
     tslib "^1.9.3"
 
-"@heroku-cli/command@^11.3.1":
-  version "11.3.1"
-  resolved "https://registry.yarnpkg.com/@heroku-cli/command/-/command-11.3.1.tgz#74671ee8149d31cc5beb0e7e8e369fe2dd7aeac2"
-  integrity sha512-n3+KgMmXScZDVEQu76mffzOJoQ5JyRYzzJ7uj3cNyAOK61xjaS1wEE86DBb57C1MlnjKtO7onJETBm2SMLdUIQ==
+"@heroku-cli/command@^11.4.0":
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/@heroku-cli/command/-/command-11.5.0.tgz#86cf0e1e4b2ab5ec3a8dc1c1867bdc4ff3bb8c98"
+  integrity sha512-tUGmJbnRiBinJk9/OgP1w80YyQFnqgVQCySJoR2juBp9JjcwYPK8pIyO/P5xiL1+Aj69w4KbguDZVGWP079UKg==
   dependencies:
     "@heroku-cli/color" "^2.0.1"
+    "@heroku/http-call" "^5.4.0"
     "@oclif/core" "^2.16.0"
     cli-ux "^6.0.9"
-    debug "^4.3.4"
+    debug "^4.4.0"
     fs-extra "^9.1.0"
     heroku-client "^3.1.0"
-    http-call "^5.3.0"
     netrc-parser "^3.1.6"
     open "^8.4.2"
     uuid "^8.3.0"
@@ -422,6 +422,17 @@
   version "1.0.25"
   resolved "https://registry.npmjs.org/@heroku-cli/schema/-/schema-1.0.25.tgz"
   integrity sha512-7V6/WdTHrsvpqeqttm4zhzVJyt/Us/Cz9oS4yure4JdLtwlr2eF6PvlDLA5ZIvBybMtSDyxhHid0PeshKLtwxw==
+
+"@heroku/http-call@^5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@heroku/http-call/-/http-call-5.4.0.tgz#1f3d804d17888c61d375d2dcb399f405781132e8"
+  integrity sha512-8ys8jFP9l1wFXNmhmUb/EKLY/3flGzd7lv3x5MCw+36ov+qR9OFgk7bNHn3s+FPUKRSf/2GmKJjJmgnaD1YMmA==
+  dependencies:
+    content-type "^1.0.5"
+    debug "^4.4.0"
+    is-retry-allowed "^2.2.0"
+    is-stream "^2.0.0"
+    tunnel-agent "^0.6.0"
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
@@ -1702,9 +1713,9 @@ confusing-browser-globals@1.0.10:
   resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.10.tgz#30d1e7f3d1b882b25ec4933d1d1adac353d20a59"
   integrity sha512-gNld/3lySHwuhaVluJUKLePYirM3QNCKzVxqAdhJII9/WXKVX5PURzMVJspS1jTslSqjeuG4KMVTSouit5YPHA==
 
-content-type@^1.0.4:
+content-type@^1.0.4, content-type@^1.0.5:
   version "1.0.5"
-  resolved "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz"
+  resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.5.tgz#8b773162656d1d1086784c8f23a54ce6d73d7918"
   integrity sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==
 
 convert-source-map@^1.7.0:
@@ -1863,6 +1874,13 @@ debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.3, debug@^4.3
   integrity sha512-O/09Bd4Z1fBrU4VzkhFqVgpPzaGbw6Sm9FEkBT1A/YBXQFGuuSxa1dN2nxgxS34JmKXqYx8CZAwEVoJFImUXIg==
   dependencies:
     ms "2.1.2"
+
+debug@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.4.0.tgz#2b3f2aea2ffeb776477460267377dc8710faba8a"
+  integrity sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==
+  dependencies:
+    ms "^2.1.3"
 
 decamelize@^1.1.2, decamelize@^1.2.0:
   version "1.2.0"
@@ -3083,7 +3101,7 @@ html-escaper@^2.0.0:
   resolved "https://registry.npmjs.org/html-escaper/-/html-escaper-2.0.2.tgz"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
-http-call@^5.1.2, http-call@^5.2.2, http-call@^5.3.0:
+http-call@^5.1.2, http-call@^5.2.2:
   version "5.3.0"
   resolved "https://registry.npmjs.org/http-call/-/http-call-5.3.0.tgz"
   integrity sha512-ahwimsC23ICE4kPl9xTBjKB4inbRaeLyZeRunC/1Jy/Z6X8tv22MEAjK+KBOMSVLaqXPTTmd8638waVIKLGx2w==
@@ -3363,6 +3381,11 @@ is-retry-allowed@^1.0.0, is-retry-allowed@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/is-retry-allowed/-/is-retry-allowed-1.2.0.tgz"
   integrity sha512-RUbUeKwvm3XG2VYamhJL1xFktgjvPzL0Hq8C+6yrWIswDy3BIXGqCxhxkc30N9jqK311gVU137K8Ei55/zVJRg==
+
+is-retry-allowed@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/is-retry-allowed/-/is-retry-allowed-2.2.0.tgz#88f34cbd236e043e71b6932d09b0c65fb7b4d71d"
+  integrity sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==
 
 is-scoped@^1.0.0:
   version "1.0.0"
@@ -4161,7 +4184,7 @@ ms@2.1.2:
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-ms@2.1.3, ms@^2.1.1:
+ms@2.1.3, ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
