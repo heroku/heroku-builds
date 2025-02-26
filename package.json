@@ -19,9 +19,10 @@
   },
   "homepage": "https://github.com/heroku/heroku-builds",
   "scripts": {
+    "build": "rm -rf dist && tsc -b && oclif manifest && oclif readme && mv oclif.manifest.json ./dist/oclif.manifest.json && cp README.md ./dist/README.md",
+    "prepare": "yarn build",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md",
-    "build": "rm -rf dist && tsc -b && oclif manifest"
+    "version": "oclif readme && git add README.md"
   },
   "oclif": {
     "commands": "./dist/commands",
