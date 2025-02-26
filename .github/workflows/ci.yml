@@ -11,15 +11,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16.x, 20.x ]
-        os: [ ubuntu-24.04, pub-hk-ubuntu-24.04-arm-small ]
+        node-version: [20.x, 22.x]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install -g yarn
-      - run: yarn --frozen-lockfile --ignore-engines
+          cache: yarn
+      - run: yarn --immutable --network-timeout 1000000
       - run: yarn test
