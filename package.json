@@ -7,7 +7,7 @@
     "url": "https://github.com/heroku/heroku-builds.git"
   },
   "engines": {
-    "node": ">= 16.20.0"
+    "node": ">= 20"
   },
   "keywords": [
     "heroku-plugin"
@@ -35,8 +35,8 @@
     "@heroku-cli/color": "2.0.3",
     "@heroku-cli/command": "^11.4.0",
     "@heroku-cli/schema": "^1.0.25",
-    "@oclif/core": "^2.16.0",
     "@heroku/http-call": "^5.4.0",
+    "@oclif/core": "^2.16.0",
     "ignore": "~ 5.3.1",
     "strftime": "0.10.3",
     "tar": "~6.2.1",
@@ -46,7 +46,7 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "2.4.7",
     "@oclif/test": "^2.3.28",
-    "@types/mocha": "^10",
+    "@types/mocha": "^10.0.10",
     "@types/nock": "^11.1.0",
     "@types/node": "^16",
     "@types/strftime": "^0.9.8",
@@ -56,12 +56,13 @@
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4.0.0",
     "eslint-config-oclif-typescript": "^1.0.2",
-    "mocha": "9.2.2",
+    "mocha": "^10.8.2",
     "mocha-junit-reporter": "2.2.1",
     "mockdate": "3.0.5",
     "nock": "^13",
+    "np": "^10.2.0",
     "nyc": "^15.1.0",
-    "oclif": "2.2.0",
+    "oclif": "^4.14.36",
     "sinon": "^18",
     "stdout-stderr": "^0",
     "tmp": "^0.2.3",
