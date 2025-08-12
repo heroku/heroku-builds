@@ -44,7 +44,7 @@
     "tsheredoc": "^1.0.1"
   },
   "devDependencies": {
-    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "2.4.7",
     "@oclif/test": "^2.3.28",
     "@types/mocha": "^10.0.10",
