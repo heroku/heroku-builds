@@ -61,6 +61,9 @@ export default class Index extends Command {
           return color.magenta(row.user?.email?.replace(/@addons\.heroku\.com$/, ''))
         }
       }
+    },
+    {
+      'no-truncate': true,
     })
   }
 }
