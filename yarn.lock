@@ -994,10 +994,10 @@
     yargs-parser "^18.1.3"
     yargs-unparser "^2.0.0"
 
-"@heroku-cli/schema@^1.0.25":
-  version "1.0.25"
-  resolved "https://registry.npmjs.org/@heroku-cli/schema/-/schema-1.0.25.tgz"
-  integrity sha512-7V6/WdTHrsvpqeqttm4zhzVJyt/Us/Cz9oS4yure4JdLtwlr2eF6PvlDLA5ZIvBybMtSDyxhHid0PeshKLtwxw==
+"@heroku-cli/schema@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@heroku-cli/schema/-/schema-2.0.0.tgz#917544991d2d9ffaeb4e3df4f7efb973ffe6f245"
+  integrity sha512-ldrwW9VnoAzxjkUYq5qgnsTPi6w6EKIWdAbdTDugRhsYggleHfn0lXJhHOm0gBMy7vB6EwFEivTLVnD675LF8Q==
 
 "@heroku/http-call@^5.4.0":
   version "5.4.0"
