@@ -61,7 +61,6 @@
     "mocha-junit-reporter": "2.2.1",
     "mockdate": "3.0.5",
     "nock": "^13",
-    "np": "^10.2.0",
     "nyc": "^15.1.0",
     "oclif": "^4.14.36",
     "sinon": "^21",
