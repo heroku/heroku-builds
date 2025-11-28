@@ -57,7 +57,7 @@
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4.0.0",
     "eslint-config-oclif-typescript": "^1.0.2",
-    "mocha": "^10.8.2",
+    "mocha": "^11.7.5",
     "mocha-junit-reporter": "2.2.1",
     "mockdate": "3.0.5",
     "nock": "^13",
