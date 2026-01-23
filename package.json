@@ -40,7 +40,7 @@
     "@oclif/core": "^2.16.0",
     "ignore": "~ 5.3.1",
     "strftime": "0.10.3",
-    "tar": "~6.2.1",
+    "tar": "~7.5.4",
     "tsheredoc": "^1.0.1"
   },
   "devDependencies": {
