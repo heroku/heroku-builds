@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@heroku-cli/color": "2.0.3",
+    "@heroku-cli/color": "2.0.5",
     "@heroku-cli/command": "^11.4.0",
     "@heroku-cli/schema": "^1.0.25",
     "@heroku/http-call": "^5.4.0",
