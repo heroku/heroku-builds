@@ -35,7 +35,7 @@
   "dependencies": {
     "@heroku-cli/color": "2.0.3",
     "@heroku-cli/command": "^11.4.0",
-    "@heroku-cli/schema": "^1.0.25",
+    "@heroku-cli/schema": "^2.0.1",
     "@heroku/http-call": "^5.4.0",
     "@oclif/core": "^2.16.0",
     "ignore": "~ 5.3.1",
