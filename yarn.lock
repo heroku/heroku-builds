@@ -845,20 +845,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@heroku-cli/color@2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@heroku-cli/color/-/color-2.0.3.tgz#3f993e95f6a71b92b36f29b9882ad9ec8201d7f2"
-  integrity sha512-xr0Yu0qZta9K+LOq0UvIwW32g+WcWea9Dgmph9oq2zzslgdrOtm6Wm4IMzPN7PymfTUa1n6SEyzRr6HuDEvKXA==
-  dependencies:
-    ansi-styles "^4.3.0"
-    chalk "^4.1.2"
-    supports-color "^7.2.0"
-    tslib "^1.9.3"
-
-"@heroku-cli/color@^2.0.1":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@heroku-cli/color/-/color-2.0.4.tgz#fc13dcc5cb372d202ba52cd27df4c7edc8d0b08b"
-  integrity sha512-CjG4Mlj8B5ZELk8mzgJLUEb1fH+zckrqtufgxeKG9jLMyUCRyHNhEEBT9XHadPE6HbKTXMzW941QsmK6qVgNng==
+"@heroku-cli/color@2.0.5", "@heroku-cli/color@^2.0.1":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@heroku-cli/color/-/color-2.0.5.tgz#b10bec4640ea55562f645add8ba9ba2d8252b01d"
+  integrity sha512-zvlWxa+GTZlGLtUgeVQyiH5ynqz7Lh0GEJJwcsUMSVGCgcaIdm2KsltRN3GsEcsMqRuaFBVFHHToKoozIFqvnQ==
   dependencies:
     ansi-styles "^4.3.0"
     chalk "^4.1.2"
@@ -5314,12 +5304,7 @@ tslib@^1.8.1, tslib@^1.9.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
-  integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
-
-tslib@^2.0.0, tslib@^2.0.3, tslib@^2.4.1, tslib@^2.5.0, tslib@^2.6.2:
+tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.4.1, tslib@^2.5.0, tslib@^2.6.2:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
