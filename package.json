@@ -20,7 +20,9 @@
   "homepage": "https://github.com/heroku/heroku-builds",
   "scripts": {
     "build": "rm -rf dist && tsc -b && oclif manifest && oclif readme && mv oclif.manifest.json ./dist/oclif.manifest.json && cp README.md ./dist/README.md",
+    "lint": "eslint .",
     "prepack": "yarn build",
+    "posttest": "yarn lint",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"
   },
@@ -54,15 +56,15 @@
     "@types/tar": "^6.1.13",
     "@types/tmp": "^0.2.6",
     "chai": "^4",
-    "eslint": "^7.32.0",
-    "eslint-config-oclif": "^4.0.0",
-    "eslint-config-oclif-typescript": "^1.0.2",
-    "mocha": "^11.7.5",
+    "eslint": "^9",
+    "eslint-config-oclif": "^6.0.144",
+    "eslint-plugin-mocha": "^11.2.0",
+    "mocha": "^11",
     "mocha-junit-reporter": "2.2.1",
     "mockdate": "3.0.5",
     "nock": "^14",
     "nyc": "^15.1.0",
-    "oclif": "4.22.73",
+    "oclif": "4.22.81",
     "sinon": "^21",
     "stdout-stderr": "^0",
     "tmp": "^0.2.3",
@@ -71,5 +73,8 @@
   },
   "files": [
     "/dist"
-  ]
+  ],
+  "resolutions": {
+    "serialize-javascript": "^7.0.3"
+  }
 }
