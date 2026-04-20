@@ -1,18 +1,16 @@
 name: Node CI Suite
 
-on:
-  push
+on: push
 
 jobs:
   test:
-
     runs-on: ${{ matrix.os }}
     name: Node Tests
 
     strategy:
       matrix:
         node-version: [20.x, 22.x]
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v4

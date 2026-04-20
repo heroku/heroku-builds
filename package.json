@@ -64,7 +64,7 @@
     "mockdate": "3.0.5",
     "nock": "^14",
     "nyc": "^15.1.0",
-    "oclif": "4.22.81",
+    "oclif": "4.22.87",
     "sinon": "^21",
     "stdout-stderr": "^0",
     "tmp": "^0.2.3",
@@ -75,6 +75,6 @@
     "/dist"
   ],
   "resolutions": {
-    "serialize-javascript": "^7.0.3"
+    "serialize-javascript": "^7.0.5"
   }
 }
