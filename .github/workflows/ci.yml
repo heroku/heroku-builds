@@ -1,11 +1,9 @@
 name: Node CI Suite
 
-on:
-  push
+on: push
 
 jobs:
   test:
-
     runs-on: ${{ matrix.os }}
     name: Node Tests
 
