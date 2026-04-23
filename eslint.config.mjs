@@ -7,6 +7,7 @@ export default [
       './dist',
       './lib',
       '**/*.js',
+      'coverage/**/*',
       'workflows-repo/**/*',
     ],
   },
@@ -47,6 +48,12 @@ export default [
       'unicorn/no-useless-undefined': 'warn',
       'unicorn/prefer-node-protocol': 'warn',
       'unicorn/prefer-number-properties': 'warn',
+    },
+  },
+  {
+    files: ['test/**/*.ts'],
+    rules: {
+      'prefer-arrow-callback': 'off',
     },
   },
 ]

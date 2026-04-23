@@ -1,8 +1,9 @@
-.DS_Store
-.jshint*
-/node_modules/
-coverage
-.nyc_output
-.idea
+*-debug.log
+*-error.log
+**/.DS_Store
+/.idea
 /dist
+/node_modules
+/tmp
 oclif.manifest.json
+coverage

@@ -3,8 +3,8 @@ import * as Heroku from '@heroku-cli/schema'
 
 export async function findBuild(heroku: APIClient, app: string, search: (builds: Heroku.Build[]) => Heroku.Build): Promise<Heroku.Build | undefined> {
   const {body: builds} = await heroku.get<Heroku.Build[]>(`/apps/${app}/builds`, {
+    headers: {Range: 'created_at ..; max=10, order=desc'},
     partial: true,
-    headers: {Range: 'created_at ..; max=10, order=desc'}
   })
   return search(builds)
 }
@@ -20,12 +20,12 @@ export async function findByLatestOrId(heroku: APIClient, app: string, build: st
 
 export function statusColor(status: Heroku.Build['status']) {
   switch (status) {
-  case 'pending': {
-    return 'yellow'
-  }
-
   case 'failed': {
     return 'red'
+  }
+
+  case 'pending': {
+    return 'yellow'
   }
 
   case 'succeeded': {

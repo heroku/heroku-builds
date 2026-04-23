@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "module": "NodeNext",
-    "outDir": "dist",
-    "rootDirs": ["src"],
-    "strict": true,
-    "target": "esnext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "pretty": true,
+    "rootDirs": ["./src"],
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "strict": true,
+    "target": "ES2022"
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["./src/**/*"],
+  "ts-node": { "esm": true }
 }
