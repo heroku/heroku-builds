@@ -8,7 +8,7 @@
     "url": "https://github.com/heroku/heroku-builds.git"
   },
   "engines": {
-    "node": ">= 20"
+    "node": ">= 22"
   },
   "keywords": [
     "heroku-plugin"
@@ -44,8 +44,7 @@
     "@oclif/core": "^4.3.0",
     "ignore": "~ 5.3.1",
     "strftime": "0.10.3",
-    "tar": "~7.5.4",
-    "tsheredoc": "^1.0.1"
+    "tar": "~7.5.4"
   },
   "devDependencies": {
     "@oclif/plugin-help": "^5",
@@ -61,11 +60,8 @@
     "eslint-config-oclif": "^6.0.144",
     "eslint-plugin-mocha": "^11.2.0",
     "mocha": "^11",
-    "mocha-junit-reporter": "2.2.1",
-    "mockdate": "3.0.5",
     "nock": "^14",
     "oclif": "4.22.87",
-    "sinon": "^21",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },

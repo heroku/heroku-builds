@@ -85,7 +85,7 @@ export default class Create extends Command {
     const {
       app,
       dir = process.cwd(),
-      'include-vs-ignore': includeVcsIgnore,
+      'include-vcs-ignore': includeVcsIgnore,
       'source-tar': sourceTar,
       'source-url': sourceUrl,
       tar,

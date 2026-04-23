@@ -16,8 +16,8 @@ describe('node_tar', function () {
     try {
       await nodeTar('/dev/null', file)
       expect.fail('should have thrown')
-    } catch {
-      // expected
+    } catch (error: unknown) {
+      expect(error).to.be.instanceOf(Error)
     }
   })
 })

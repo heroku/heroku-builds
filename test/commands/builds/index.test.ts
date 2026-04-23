@@ -75,16 +75,21 @@ describe('builds index', function () {
   })
 
   it('shows builds', async function () {
+    const originalColumns = process.stdout.columns
     process.stdout.columns = 200
-    const api = nock('https://api.heroku.com:443')
-    .get('/apps/my-app/builds')
-    .reply(200, builds)
-    const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
-    expect(stdout).to.contain('my-app Builds')
-    expect(stdout).to.contain('build_uuid')
-    expect(stdout).to.contain('succeeded_blob_version')
-    expect(stdout).to.contain('failed_blob_version')
-    expect(stdout).to.contain('damien@heroku.com')
-    api.done()
+    try {
+      const api = nock('https://api.heroku.com:443')
+      .get('/apps/my-app/builds')
+      .reply(200, builds)
+      const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
+      expect(stdout).to.contain('my-app Builds')
+      expect(stdout).to.contain('build_uuid')
+      expect(stdout).to.contain('succeeded_blob_version')
+      expect(stdout).to.contain('failed_blob_version')
+      expect(stdout).to.contain('damien@heroku.com')
+      api.done()
+    } finally {
+      process.stdout.columns = originalColumns
+    }
   })
 })
