@@ -5,6 +5,12 @@ import nock from 'nock'
 import Cmd from '../../../src/commands/builds/create.js'
 
 describe('builds create', function () {
+  let originalColumns: number | undefined
+
+  beforeEach(function () {
+    originalColumns = process.stdout.columns
+  })
+
   const source = {
     source_blob: {
       get_url: 'https://api.heroku.com/sources/1234.tgz',
@@ -37,6 +43,12 @@ describe('builds create', function () {
   }
 
   afterEach(function () {
+    if (originalColumns === undefined) {
+      delete (process.stdout as {columns?: number}).columns
+    } else {
+      process.stdout.columns = originalColumns
+    }
+
     nock.cleanAll()
   })
 

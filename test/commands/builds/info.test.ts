@@ -5,6 +5,12 @@ import nock from 'nock'
 import Cmd from '../../../src/commands/builds/info.js'
 
 describe('builds info', function () {
+  let originalColumns: number | undefined
+
+  beforeEach(function () {
+    originalColumns = process.stdout.columns
+  })
+
   const build = {
     app: {
       id: 'app_uuid',
@@ -62,6 +68,12 @@ describe('builds info', function () {
   }
 
   afterEach(function () {
+    if (originalColumns === undefined) {
+      delete (process.stdout as {columns?: number}).columns
+    } else {
+      process.stdout.columns = originalColumns
+    }
+
     nock.cleanAll()
   })
 
@@ -99,6 +111,15 @@ describe('builds info', function () {
     expect(stdout).to.contain('Build build_uuid')
     expect(stdout).to.contain('damien@heroku.com')
     expect(stdout).to.contain('failed')
+    api.done()
+  })
+
+  it('warns when no build is found', async function () {
+    const api = nock('https://api.heroku.com:443')
+    .get('/apps/my-app/builds')
+    .reply(200, [])
+    const {stderr} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stderr).to.contain('No builds found')
     api.done()
   })
 })

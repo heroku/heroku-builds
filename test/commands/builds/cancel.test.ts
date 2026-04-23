@@ -37,4 +37,13 @@ describe('builds cancel', function () {
     expect(error?.message).to.contain('Can only cancel pending builds')
     api.done()
   })
+
+  it('warns when no build is found', async function () {
+    const api = nock('https://api.heroku.com:443')
+    .get('/apps/my-app/builds')
+    .reply(200, [])
+    const {stderr} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stderr).to.contain('No build found')
+    api.done()
+  })
 })
