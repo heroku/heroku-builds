@@ -6,17 +6,17 @@ describe('time', function () {
   describe('ago', function () {
     it('shows seconds for < 60s', function () {
       const since = new Date(Date.now() - (30 * 1000))
-      expect(ago(since)).to.contain('30s ago')
+      expect(ago(since)).to.match(/~ \d+s ago/)
     })
 
     it('shows minutes for < 1h', function () {
       const since = new Date(Date.now() - (5 * 60 * 1000))
-      expect(ago(since)).to.contain('5m ago')
+      expect(ago(since)).to.match(/~ \d+m ago/)
     })
 
     it('shows hours for < 25h', function () {
       const since = new Date(Date.now() - (3 * 60 * 60 * 1000))
-      expect(ago(since)).to.contain('3h ago')
+      expect(ago(since)).to.match(/~ \d+h ago/)
     })
 
     it('shows date only for >= 25h', function () {
