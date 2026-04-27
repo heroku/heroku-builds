@@ -1,7 +1,6 @@
 import {Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
 import {hux} from '@heroku/heroku-cli-util'
-import * as color from '@heroku/heroku-cli-util/color'
 import {Args} from '@oclif/core'
 import {ux} from '@oclif/core/ux'
 
@@ -30,8 +29,7 @@ export default class Info extends Command {
     if (json) {
       ux.stdout(ux.colorizeJson(build))
     } else {
-      const statusFn = color[statusColor(build.status) as keyof typeof color] as ((s: string) => string) | undefined
-      const coloredId = statusFn ? statusFn(build.id as string) : build.id
+      const coloredId = statusColor(build.status)(build.id as string)
       hux.styledHeader(`Build ${coloredId}`)
       const data = {
         Buildpacks: build.buildpacks?.map(e => e.url),

@@ -50,8 +50,7 @@ export default class Index extends Command {
       },
       status: {
         get(row: Heroku.Build): null | string | undefined {
-          const statusFn = color[statusColor(row.status) as keyof typeof color] as ((s: string) => string) | undefined
-          return statusFn ? statusFn(row.status as string) : row.status
+          return statusColor(row.status)(row.status as string)
         },
         header: 'Status',
       },
@@ -62,6 +61,6 @@ export default class Index extends Command {
         },
         header: 'User',
       },
-    })
+    }, {maxWidth: 'none'})
   }
 }
