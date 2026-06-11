@@ -80,8 +80,8 @@ describe('builds info', function () {
   it('shows build info in json', async function () {
     process.stdout.columns = 80
     const api = nock('https://api.heroku.com:443')
-    .get('/apps/my-app/builds')
-    .reply(200, [build])
+      .get('/apps/my-app/builds')
+      .reply(200, [build])
     const {stdout} = await runCommand(Cmd, ['--app', 'my-app', '--json'])
     expect(JSON.parse(stdout)).to.have.deep.property('status', 'succeeded')
     api.done()
@@ -90,10 +90,10 @@ describe('builds info', function () {
   it('shows the latest build info', async function () {
     process.stdout.columns = 80
     const api = nock('https://api.heroku.com:443')
-    .get('/apps/my-app/builds')
-    .reply(200, [build])
-    .get('/apps/my-app/releases/release_uuid')
-    .reply(200, {version: 42})
+      .get('/apps/my-app/builds')
+      .reply(200, [build])
+      .get('/apps/my-app/releases/release_uuid')
+      .reply(200, {version: 42})
     const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
     expect(stdout).to.contain('Build build_uuid')
     expect(stdout).to.contain('damien@heroku.com')
@@ -105,8 +105,8 @@ describe('builds info', function () {
   it('shows a failed build info', async function () {
     process.stdout.columns = 80
     const api = nock('https://api.heroku.com:443')
-    .get('/apps/my-app/builds')
-    .reply(200, [failedBuild])
+      .get('/apps/my-app/builds')
+      .reply(200, [failedBuild])
     const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
     expect(stdout).to.contain('Build build_uuid')
     expect(stdout).to.contain('damien@heroku.com')
@@ -116,8 +116,8 @@ describe('builds info', function () {
 
   it('warns when no build is found', async function () {
     const api = nock('https://api.heroku.com:443')
-    .get('/apps/my-app/builds')
-    .reply(200, [])
+      .get('/apps/my-app/builds')
+      .reply(200, [])
     const {stderr} = await runCommand(Cmd, ['--app', 'my-app'])
     expect(stderr).to.contain('No builds found')
     api.done()

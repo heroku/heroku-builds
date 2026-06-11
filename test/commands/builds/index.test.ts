@@ -79,8 +79,8 @@ describe('builds index', function () {
     process.stdout.columns = 200
     try {
       const api = nock('https://api.heroku.com:443')
-      .get('/apps/my-app/builds')
-      .reply(200, builds)
+        .get('/apps/my-app/builds')
+        .reply(200, builds)
       const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
       expect(stdout).to.contain('my-app Builds')
       expect(stdout).to.contain('build_uuid')

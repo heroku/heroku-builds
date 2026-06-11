@@ -1,6 +1,6 @@
 import {Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
-import {hux} from '@heroku/heroku-cli-util'
+import {styledHeader, styledJSON, styledObject} from '@heroku/heroku-cli-util/hux'
 import {Args} from '@oclif/core'
 import {ux} from '@oclif/core/ux'
 
@@ -27,15 +27,15 @@ export default class Info extends Command {
     }
 
     if (json) {
-      ux.stdout(ux.colorizeJson(build))
+      styledJSON(build)
     } else {
       const coloredId = statusColor(build.status)(build.id as string)
-      hux.styledHeader(`Build ${coloredId}`)
+      styledHeader(`Build ${coloredId}`)
       const data = {
-        Buildpacks: build.buildpacks?.map(e => e.url),
         By: build.user?.email,
-        Status: build.status,
         When: build.created_at,
+        Status: build.status,
+        Buildpacks: build.buildpacks?.map(e => e.url),
       } as Record<string, unknown>
 
       if (build.release) {
@@ -43,7 +43,7 @@ export default class Info extends Command {
         data.Release = `v${release.version}`
       }
 
-      hux.styledObject(data)
+      styledObject(data)
     }
   }
 }

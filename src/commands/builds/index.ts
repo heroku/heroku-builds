@@ -1,7 +1,7 @@
 import {Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
-import {hux} from '@heroku/heroku-cli-util'
 import * as color from '@heroku/heroku-cli-util/color'
+import {styledHeader, table} from '@heroku/heroku-cli-util/hux'
 
 import {statusColor} from '../../lib/builds.js'
 import {ago, duration} from '../../lib/time.js'
@@ -22,44 +22,44 @@ export default class Index extends Command {
       headers: {Range: `created_at ..; max=${num || 15}, order=desc`},
       partial: true,
     })
-    hux.styledHeader(`${app} Builds`)
-    hux.table<Heroku.Build>(builds, {
-      created_at: {
-        get(row: Heroku.Build): null | string | undefined {
-          return ago(new Date(row.created_at as string))
-        },
-        header: 'Created At',
-      },
-      duration: {
-        get(row: Heroku.Build): null | string | undefined {
-          return duration(new Date(row.created_at as string), new Date(row.updated_at as string))
-        },
-        header: 'Duration',
-      },
+    styledHeader(`${app} Builds`)
+    table<Heroku.Build>(builds, {
       id: {
+        header: 'ID',
         get(row: Heroku.Build): null | string | undefined {
           return row.id
         },
-        header: 'ID',
       },
       sourceVersion: {
+        header: 'Source Version',
         get(row: Heroku.Build): null | string | undefined {
           return row.source_blob?.version
         },
-        header: 'Source Version',
+      },
+      created_at: {
+        header: 'Created At',
+        get(row: Heroku.Build): null | string | undefined {
+          return ago(new Date(row.created_at as string))
+        },
+      },
+      duration: {
+        header: 'Duration',
+        get(row: Heroku.Build): null | string | undefined {
+          return duration(new Date(row.created_at as string), new Date(row.updated_at as string))
+        },
       },
       status: {
+        header: 'Status',
         get(row: Heroku.Build): null | string | undefined {
           return statusColor(row.status)(row.status as string)
         },
-        header: 'Status',
       },
       user: {
+        header: 'User',
         get(row: Heroku.Build): null | string | undefined {
           const email = row.user?.email?.replace(/@addons\.heroku\.com$/, '')
           return email ? color.magenta(email) : undefined
         },
-        header: 'User',
       },
     }, {maxWidth: 'none'})
   }

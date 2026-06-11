@@ -21,20 +21,20 @@ export async function findByLatestOrId(heroku: APIClient, app: string, build: st
 
 export function statusColor(status: Heroku.Build['status']): (text: string) => string {
   switch (status) {
-  case 'failed': {
-    return color.failure
-  }
+    case 'failed': {
+      return color.failure
+    }
 
-  case 'pending': {
-    return color.warning
-  }
+    case 'pending': {
+      return color.warning
+    }
 
-  case 'succeeded': {
-    return color.success
-  }
+    case 'succeeded': {
+      return color.success
+    }
 
-  default: {
-    return (text: string) => text
-  }
+    default: {
+      return (text: string) => text
+    }
   }
 }

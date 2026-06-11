@@ -20,6 +20,7 @@ updates:
       timezone: "America/Los_Angeles"
     commit-message:
       prefix: "deps"
+      prefix-development: "deps(dev)"
     groups:
       dev-patch-minor-dependencies:
         dependency-type: "development"
