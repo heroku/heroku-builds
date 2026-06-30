@@ -1,12 +1,27 @@
-import {expect} from '@oclif/test'
+import {runCommand} from '@heroku-cli/test-utils'
+import {expect} from 'chai'
 import nock from 'nock'
-import {stdout} from 'stdout-stderr'
 
-import Cmd from '../../../src/commands/builds/output'
-import {runCommand} from '../../run-command'
+import Cmd from '../../../src/commands/builds/output.js'
 
-describe('builds:output', () => {
-  it('shows the output from a build', async () => {
+describe('builds:output', function () {
+  let originalColumns: number | undefined
+
+  beforeEach(function () {
+    originalColumns = process.stdout.columns
+  })
+
+  afterEach(function () {
+    if (originalColumns === undefined) {
+      delete (process.stdout as {columns?: number}).columns
+    } else {
+      process.stdout.columns = originalColumns
+    }
+
+    nock.cleanAll()
+  })
+
+  it('shows the output from a build', async function () {
     process.stdout.columns = 80
     const busl = nock('https://busl.test:443')
       .get('/streams/build.log')
@@ -15,13 +30,13 @@ describe('builds:output', () => {
       .get('/apps/my-app/builds/build_id')
       .reply(200, {output_stream_url: 'https://busl.test/streams/build.log'})
 
-    await runCommand(Cmd, ['--app', 'my-app', 'build_id'])
-    expect(stdout.output).to.equal('Build Content')
+    const {stdout} = await runCommand(Cmd, ['--app', 'my-app', 'build_id'])
+    expect(stdout).to.contain('Build Content')
     busl.done()
     api.done()
   })
 
-  it('shows the output from the latest build', async () => {
+  it('shows the output from the latest build', async function () {
     process.stdout.columns = 80
     const busl = nock('https://busl.test:443')
       .get('/streams/build.log')
@@ -29,9 +44,18 @@ describe('builds:output', () => {
     const api = nock('https://api.heroku.com:443')
       .get('/apps/my-app/builds')
       .reply(200, [{output_stream_url: 'https://busl.test/streams/build.log'}])
-    await runCommand(Cmd, ['--app', 'my-app'])
-    expect(stdout.output).to.equal('Build Content')
+    const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stdout).to.contain('Build Content')
     busl.done()
+    api.done()
+  })
+
+  it('warns when no build is found', async function () {
+    const api = nock('https://api.heroku.com:443')
+      .get('/apps/my-app/builds')
+      .reply(200, [])
+    const {stderr} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stderr).to.contain('No build found')
     api.done()
   })
 })

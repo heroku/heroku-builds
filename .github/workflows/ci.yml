@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
+        node-version: [22.x, 24.x]
         os: [ubuntu-latest, macos-latest]
 
     steps:
@@ -18,6 +18,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
-      - run: yarn --immutable --network-timeout 1000000
-      - run: yarn test
+          cache: npm
+      - run: npm ci
+      - run: npm test

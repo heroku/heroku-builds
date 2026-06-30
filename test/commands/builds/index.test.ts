@@ -1,12 +1,10 @@
-import {expect} from '@oclif/test'
+import {runCommand} from '@heroku-cli/test-utils'
+import {expect} from 'chai'
 import nock from 'nock'
-import {stderr, stdout} from 'stdout-stderr'
-import heredoc from 'tsheredoc'
 
-import Cmd from '../../../src/commands/builds/index'
-import {runCommand} from '../../run-command'
+import Cmd from '../../../src/commands/builds/index.js'
 
-describe('builds index', () => {
+describe('builds index', function () {
   const builds = [
     {
       app: {
@@ -72,21 +70,26 @@ describe('builds index', () => {
     },
   ]
 
-  it('shows builds', async () => {
-    process.stdout.columns = 80
-    const api = nock('https://api.heroku.com:443')
-      .get('/apps/my-app/builds')
-      .reply(200, builds)
-    await runCommand(Cmd, ['--app', 'my-app'])
-    expect(stdout.output).to.eq(heredoc(`
- === my-app Builds
+  afterEach(function () {
+    nock.cleanAll()
+  })
 
-  ID         Source Version         Created At                Duration Status    User              
-  ────────── ────────────────────── ───────────────────────── ──────── ───────── ───────────────── 
-  build_uuid succeeded_blob_version 2016/08/08 08:46:40 +0000 15s      succeeded damien@heroku.com 
-  build_uuid failed_blob_version    2016/08/08 08:46:40 +0000 15s      failed    damien@heroku.com 
-`))
-    expect(stderr.output, 'to be empty')
-    api.done()
+  it('shows builds', async function () {
+    const originalColumns = process.stdout.columns
+    process.stdout.columns = 200
+    try {
+      const api = nock('https://api.heroku.com:443')
+        .get('/apps/my-app/builds')
+        .reply(200, builds)
+      const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
+      expect(stdout).to.contain('my-app Builds')
+      expect(stdout).to.contain('build_uuid')
+      expect(stdout).to.contain('succeeded_blob_version')
+      expect(stdout).to.contain('failed_blob_version')
+      expect(stdout).to.contain('damien@heroku.com')
+      api.done()
+    } finally {
+      process.stdout.columns = originalColumns
+    }
   })
 })

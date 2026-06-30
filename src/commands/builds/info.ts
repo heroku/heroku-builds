@@ -1,26 +1,25 @@
-import color from '@heroku-cli/color'
 import {Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
-import {Args, ux} from '@oclif/core'
+import {styledHeader, styledJSON, styledObject} from '@heroku/heroku-cli-util/hux'
+import {Args} from '@oclif/core'
+import {ux} from '@oclif/core/ux'
 
-import {findByLatestOrId, statusColor} from '../../lib/builds'
+import {findByLatestOrId, statusColor} from '../../lib/builds.js'
 
 export default class Info extends Command {
   static args = {
     build: Args.string(),
   }
-
   static description = 'view detailed information for a build'
   static flags = {
-    json: flags.boolean({description: 'output in json format'}),
     app: flags.app({required: true}),
-    remote: flags.remote()
+    json: flags.boolean({description: 'output in json format'}),
+    remote: flags.remote(),
   }
-
   static topic = 'builds'
 
   public async run(): Promise<void> {
-    const {flags, args} = await this.parse(Info)
+    const {args, flags} = await this.parse(Info)
     const {app, json} = flags
     const build = await findByLatestOrId(this.heroku, app, args.build)
     if (!build) {
@@ -28,9 +27,10 @@ export default class Info extends Command {
     }
 
     if (json) {
-      ux.styledJSON(build)
+      styledJSON(build)
     } else {
-      ux.styledHeader(`Build ${color[statusColor(build.status)](build.id)}`)
+      const coloredId = statusColor(build.status)(build.id as string)
+      styledHeader(`Build ${coloredId}`)
       const data = {
         By: build.user?.email,
         When: build.created_at,
@@ -43,7 +43,7 @@ export default class Info extends Command {
         data.Release = `v${release.version}`
       }
 
-      ux.styledObject(data)
+      styledObject(data)
     }
   }
 }

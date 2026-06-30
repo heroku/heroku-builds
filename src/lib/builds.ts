@@ -1,10 +1,11 @@
 import {APIClient} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
+import * as color from '@heroku/heroku-cli-util/color'
 
 export async function findBuild(heroku: APIClient, app: string, search: (builds: Heroku.Build[]) => Heroku.Build): Promise<Heroku.Build | undefined> {
   const {body: builds} = await heroku.get<Heroku.Build[]>(`/apps/${app}/builds`, {
+    headers: {Range: 'created_at ..; max=10, order=desc'},
     partial: true,
-    headers: {Range: 'created_at ..; max=10, order=desc'}
   })
   return search(builds)
 }
@@ -18,22 +19,22 @@ export async function findByLatestOrId(heroku: APIClient, app: string, build: st
   return body
 }
 
-export function statusColor(status: Heroku.Build['status']) {
+export function statusColor(status: Heroku.Build['status']): (text: string) => string {
   switch (status) {
-  case 'pending': {
-    return 'yellow'
-  }
+    case 'failed': {
+      return color.failure
+    }
 
-  case 'failed': {
-    return 'red'
-  }
+    case 'pending': {
+      return color.warning
+    }
 
-  case 'succeeded': {
-    return 'green'
-  }
+    case 'succeeded': {
+      return color.success
+    }
 
-  default: {
-    return 'white'
-  }
+    default: {
+      return (text: string) => text
+    }
   }
 }

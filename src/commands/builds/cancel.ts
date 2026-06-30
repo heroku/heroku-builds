@@ -1,23 +1,21 @@
-import {color} from '@heroku-cli/color'
 import {Command, flags} from '@heroku-cli/command'
-import {Args, ux} from '@oclif/core'
+import {Args} from '@oclif/core'
+import {ux} from '@oclif/core/ux'
 
-import {findByLatestOrId} from '../../lib/builds'
+import {findByLatestOrId} from '../../lib/builds.js'
 
 export default class Cancel extends Command {
   static args = {
     build: Args.string(),
   }
-
   static description = 'cancel a running build\nStops executing a running build. Omit BUILD to cancel the latest build.'
   static flags = {
     app: flags.app({required: true}),
   }
-
   static topic = 'builds'
 
   public async run(): Promise<void> {
-    const {flags, args} = await this.parse(Cancel)
+    const {args, flags} = await this.parse(Cancel)
     const {app} = flags
     const {build: buildId} = args
     const build = await findByLatestOrId(this.heroku, app, buildId)

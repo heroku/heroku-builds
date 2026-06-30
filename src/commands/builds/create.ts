@@ -1,16 +1,16 @@
 import {APIClient, Command, flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
-import {ux} from '@oclif/core'
-import HTTP from '@heroku/http-call'
+import {HTTP} from '@heroku/http-call'
+import {ux} from '@oclif/core/ux'
 import {exec} from 'node:child_process'
 import {randomUUID} from 'node:crypto'
 import {createReadStream, statSync} from 'node:fs'
 import {stat} from 'node:fs/promises'
 import * as os from 'node:os'
-import * as path from 'node:path'
+import path from 'node:path'
 import {promisify} from 'node:util'
 
-import {nodeTar} from '../../lib/node-tar'
+import {nodeTar} from '../../lib/node-tar.js'
 
 const execPromisified = promisify(exec)
 
@@ -59,9 +59,9 @@ async function uploadDirToSource(tar: string | undefined, includeVcsIgnore: bool
   await HTTP.put(source.source_blob.put_url as string, {
     body: createReadStream(filePath),
     headers: {
-      'Content-Type': '',
       'Content-Length': statSync(filePath).size,
-    }
+      'Content-Type': '',
+    },
   })
   return source.source_blob.get_url
 }
@@ -69,16 +69,15 @@ async function uploadDirToSource(tar: string | undefined, includeVcsIgnore: bool
 export default class Create extends Command {
   static description = 'create build\nCreate build from contents of current dir'
   static flags = {
+    app: flags.app({required: true}),
+    dir: flags.string({description: 'the local path to build. Defaults to the current working directory'}),
+    'include-vcs-ignore': flags.boolean({description: 'include files ignored by VCS (.gitignore, ...) from the build'}),
+    remote: flags.remote(),
     'source-tar': flags.string({description: 'local path to source to the tarball of your application\'s source code'}),
     'source-url': flags.string({description: 'source URL that points to the tarball of your application\'s source code'}),
-    dir: flags.string({description: 'the local path to build. Defaults to the current working directory'}),
     tar: flags.string({description: 'path to the executable GNU tar'}),
     version: flags.string({description: 'description of your new build'}),
-    'include-vcs-ignore': flags.boolean({description: 'include files ignored by VCS (.gitignore, ...) from the build'}),
-    app: flags.app({required: true}),
-    remote: flags.remote(),
   }
-
   static topic = 'builds'
 
   public async run(): Promise<void> {
@@ -86,10 +85,10 @@ export default class Create extends Command {
     const {
       app,
       dir = process.cwd(),
-      tar,
-      'include-vs-ignore': includeVcsIgnore,
+      'include-vcs-ignore': includeVcsIgnore,
       'source-tar': sourceTar,
       'source-url': sourceUrl,
+      tar,
       version,
     } = flags
     let targetSourceUrl = sourceUrl

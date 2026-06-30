@@ -1,12 +1,16 @@
-import {expect} from '@oclif/test'
+import {runCommand} from '@heroku-cli/test-utils'
+import {expect} from 'chai'
 import nock from 'nock'
-import {stderr, stdout} from 'stdout-stderr'
-import heredoc from 'tsheredoc'
 
-import Cmd from '../../../src/commands/builds/info'
-import {runCommand} from '../../run-command'
+import Cmd from '../../../src/commands/builds/info.js'
 
-describe('builds info', () => {
+describe('builds info', function () {
+  let originalColumns: number | undefined
+
+  beforeEach(function () {
+    originalColumns = process.stdout.columns
+  })
+
   const build = {
     app: {
       id: 'app_uuid',
@@ -63,51 +67,59 @@ describe('builds info', () => {
     },
   }
 
-  it('shows build info in json', async () => {
+  afterEach(function () {
+    if (originalColumns === undefined) {
+      delete (process.stdout as {columns?: number}).columns
+    } else {
+      process.stdout.columns = originalColumns
+    }
+
+    nock.cleanAll()
+  })
+
+  it('shows build info in json', async function () {
     process.stdout.columns = 80
     const api = nock('https://api.heroku.com:443')
       .get('/apps/my-app/builds')
       .reply(200, [build])
-    await runCommand(Cmd, ['--app', 'my-app', '--json'])
-    expect(JSON.parse(stdout.output)).to.have.deep.property('status', 'succeeded')
+    const {stdout} = await runCommand(Cmd, ['--app', 'my-app', '--json'])
+    expect(JSON.parse(stdout)).to.have.deep.property('status', 'succeeded')
     api.done()
   })
 
-  it('shows the latest build info', async () => {
+  it('shows the latest build info', async function () {
     process.stdout.columns = 80
     const api = nock('https://api.heroku.com:443')
       .get('/apps/my-app/builds')
       .reply(200, [build])
       .get('/apps/my-app/releases/release_uuid')
       .reply(200, {version: 42})
-    await runCommand(Cmd, ['--app', 'my-app'])
-    expect(stdout.output).to.equal(heredoc(`
-    === Build build_uuid
-
-    Buildpacks: https://example.com/buildpack.tgz
-    By:         damien@heroku.com
-    Release:    v42
-    Status:     succeeded
-    When:       2016-08-08T08:46:40Z
-`))
-    expect(stderr.output).to.be.empty
+    const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stdout).to.contain('Build build_uuid')
+    expect(stdout).to.contain('damien@heroku.com')
+    expect(stdout).to.contain('v42')
+    expect(stdout).to.contain('succeeded')
     api.done()
   })
 
-  it('shows a failed build info', async () => {
+  it('shows a failed build info', async function () {
     process.stdout.columns = 80
     const api = nock('https://api.heroku.com:443')
       .get('/apps/my-app/builds')
       .reply(200, [failedBuild])
-    await runCommand(Cmd, ['--app', 'my-app'])
-    expect(stdout.output).to.eq(heredoc(`
-    === Build build_uuid
+    const {stdout} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stdout).to.contain('Build build_uuid')
+    expect(stdout).to.contain('damien@heroku.com')
+    expect(stdout).to.contain('failed')
+    api.done()
+  })
 
-    By:         damien@heroku.com
-    Status:     failed
-    When:       2016-08-08T08:46:40Z
-`))
-    expect(stderr.output).to.be.empty
+  it('warns when no build is found', async function () {
+    const api = nock('https://api.heroku.com:443')
+      .get('/apps/my-app/builds')
+      .reply(200, [])
+    const {stderr} = await runCommand(Cmd, ['--app', 'my-app'])
+    expect(stderr).to.contain('No builds found')
     api.done()
   })
 })

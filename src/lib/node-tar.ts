@@ -1,8 +1,10 @@
-import ignore from 'ignore'
+import ignoreModule from 'ignore'
 import * as fs from 'node:fs'
 import {readdir} from 'node:fs/promises'
 import * as os from 'node:os'
 import {create} from 'tar'
+
+const ignore = ignoreModule.default ?? ignoreModule
 
 export async function nodeTar(cwd: string, file: string): Promise<void> {
   let ig = ignore()
@@ -13,11 +15,10 @@ export async function nodeTar(cwd: string, file: string): Promise<void> {
   const filter = ig.createFilter()
   const files = await readdir(cwd)
   await create({
-    gzip: true,
-    file,
     cwd,
+    file,
     filter,
+    gzip: true,
     mode: os.platform() === 'win32' ? 0o0755 : 0o666,
   }, files)
 }
-

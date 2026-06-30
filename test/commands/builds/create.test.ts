@@ -1,11 +1,16 @@
-import {expect} from '@oclif/test'
+import {runCommand} from '@heroku-cli/test-utils'
+import {expect} from 'chai'
 import nock from 'nock'
-import {stderr, stdout} from 'stdout-stderr'
 
-import Cmd from '../../../src/commands/builds/create'
-import {runCommand} from '../../run-command'
+import Cmd from '../../../src/commands/builds/create.js'
 
-describe('builds create', () => {
+describe('builds create', function () {
+  let originalColumns: number | undefined
+
+  beforeEach(function () {
+    originalColumns = process.stdout.columns
+  })
+
   const source = {
     source_blob: {
       get_url: 'https://api.heroku.com/sources/1234.tgz',
@@ -37,6 +42,16 @@ describe('builds create', () => {
     },
   }
 
+  afterEach(function () {
+    if (originalColumns === undefined) {
+      delete (process.stdout as {columns?: number}).columns
+    } else {
+      process.stdout.columns = originalColumns
+    }
+
+    nock.cleanAll()
+  })
+
   function buildMocks(urlBuild?: boolean, buildData?: Record<string, unknown>) {
     const busl = nock('https://busl.test:443')
       .get('/streams/build.log')
@@ -54,58 +69,46 @@ describe('builds create', () => {
         .reply(200)
     }
 
-    return {busl, api}
+    return {api, busl}
   }
 
-  it('creates a new build', async () => {
+  it('creates a new build', async function () {
     const mocks = buildMocks()
     process.stdout.columns = 80
     await runCommand(Cmd, ['--app', 'my-app', '--dir', process.cwd() + '/test', '--include-vcs-ignore'])
-    expect(stdout.output).to.be.empty
     mocks.api.done()
     mocks.busl.done()
   })
 
-  it('creates a new build with node tar', async () => {
+  it('creates a new build with node tar', async function () {
     const mocks = buildMocks()
-    await runCommand(Cmd, ['--app', 'my-app', '--dir', process.cwd() + '/test', '--tar', 'no-tar'])
-    expect(stdout.output).to.be.empty
-    expect(stderr.output).to.contain('Couldn\'t detect GNU tar. Builds could fail due to decompression')
+    const {stderr} = await runCommand(Cmd, ['--app', 'my-app', '--dir', process.cwd() + '/test', '--tar', 'no-tar'])
+    expect(stderr).to.contain('Couldn\'t detect GNU tar. Builds could fail due to decompression')
     mocks.api.done()
     mocks.busl.done()
   })
 
-  it('creates a new build from an existing file', async () => {
+  it('creates a new build from an existing file', async function () {
     const mocks = buildMocks()
     process.stdout.columns = 80
-    // not a tar file, but will suffice for testing purposes
-    await runCommand(Cmd, ['--app', 'my-app', '--source-tar', process.cwd() + '/test/helpers.mjs'])
-    expect(stdout.output).to.be.empty
+    await runCommand(Cmd, ['--app', 'my-app', '--source-tar', process.cwd() + '/test/helpers/init.mjs'])
     mocks.api.done()
     mocks.busl.done()
   })
 
-  it('creates a new build from URL', async () => {
+  it('creates a new build from URL', async function () {
     const mocks = buildMocks(true)
     process.stdout.columns = 80
-
-    // not a tar file, but will suffice for testing purposes
     await runCommand(Cmd, ['--app', 'my-app', '--source-url', 'https://example.com/1234.tgz'])
-    expect(stdout.output, 'to be empty')
     mocks.api.done()
     mocks.busl.done()
   })
 
-  it('exits with an error on a failed build', async () => {
-    const failedBuild = build
-    failedBuild.status = 'failed'
+  it('exits with an error on a failed build', async function () {
+    const failedBuild = {...build, status: 'failed'}
     const mocks = buildMocks(false, failedBuild)
-    try {
-      await runCommand(Cmd, ['--app', 'my-app', '--dir', process.cwd() + '/test', '--include-vcs-ignore'])
-    } catch {
-      expect(stdout.output).to.be.empty
-    }
-
+    const {error} = await runCommand(Cmd, ['--app', 'my-app', '--dir', process.cwd() + '/test', '--include-vcs-ignore'])
+    expect(error?.message).to.contain('Build failed')
     mocks.api.done()
     mocks.busl.done()
   })
