@@ -60,7 +60,7 @@
     "eslint-plugin-mocha": "^11.2.0",
     "mocha": "^11",
     "nock": "^14",
-    "oclif": "4.22.87",
+    "oclif": "4.23.24",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
