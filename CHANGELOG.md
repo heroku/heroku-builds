@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.0.1](https://github.com/heroku/heroku-builds/compare/v2.0.0...v2.0.1) (2026-07-22)
+
+
+### Dependencies
+
+* bump fast-xml-parser and @aws-sdk/xml-builder ([#272](https://github.com/heroku/heroku-builds/issues/272)) ([89fd247](https://github.com/heroku/heroku-builds/commit/89fd2475190b989e03e9ef5aed54486fb67e0942))
+* bump ws from 8.20.0 to 8.21.0 ([#274](https://github.com/heroku/heroku-builds/issues/274)) ([6383ded](https://github.com/heroku/heroku-builds/commit/6383ded4934e32be9196787079aae3f6dad8d879))
+* upgrade to v13 of heroku-cli-command and v10.9.0 of heroku-cli-util ([#279](https://github.com/heroku/heroku-builds/issues/279)) ([dbb1302](https://github.com/heroku/heroku-builds/commit/dbb1302af40827a10891d8b91aa2a55ce5f0a81b))
+
 ## [2.0.0](https://github.com/heroku/heroku-builds/compare/v1.0.10...v2.0.0) (2026-06-30)
 
 
