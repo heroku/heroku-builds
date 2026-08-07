@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.2](https://github.com/heroku/heroku-builds/compare/v2.0.1...v2.0.2) (2026-08-07)
+
+
+### Dependencies
+
+* bump tar from 7.5.11 to 7.5.21 ([#281](https://github.com/heroku/heroku-builds/issues/281)) ([1106c75](https://github.com/heroku/heroku-builds/commit/1106c7500f40b48a0835e0bddf40c66756abd703))
+
 ## [2.0.1](https://github.com/heroku/heroku-builds/compare/v2.0.0...v2.0.1) (2026-07-22)
 
 
