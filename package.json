@@ -47,7 +47,7 @@
     "tar": "~7.5.4"
   },
   "devDependencies": {
-    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "5.4.86",
     "@heroku-cli/test-utils": "^0.2.0",
     "@types/mocha": "^10.0.10",
