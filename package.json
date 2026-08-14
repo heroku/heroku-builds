@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@heroku-cli/command": "^13.0.0",
-    "@heroku-cli/schema": "^1.0.25",
+    "@heroku-cli/schema": "^2.0.1",
     "@heroku/heroku-cli-util": "^10.9.0",
     "@heroku/http-call": "^5.4.0",
     "@oclif/core": "^4.3.0",
