@@ -42,7 +42,7 @@
     "@heroku/heroku-cli-util": "^10.9.0",
     "@heroku/http-call": "^5.4.0",
     "@oclif/core": "^4.3.0",
-    "ignore": "~ 5.3.1",
+    "ignore": "~ 7.0.6",
     "strftime": "0.10.3",
     "tar": "~7.5.4"
   },
