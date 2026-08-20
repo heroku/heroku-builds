@@ -1,5 +1,19 @@
 # Change Log
 
+## [2.0.2](https://github.com/heroku/heroku-builds/compare/v2.0.1...v2.0.2) (2026-08-20)
+
+
+### Dependencies
+
+* bump @heroku-cli/schema from 1.0.25 to 2.0.1 ([#227](https://github.com/heroku/heroku-builds/issues/227)) ([3a867db](https://github.com/heroku/heroku-builds/commit/3a867dbc8a422aeafbdfa6346708c3d5ccb6b30f))
+* bump actions/checkout from 6 to 7 ([#263](https://github.com/heroku/heroku-builds/issues/263)) ([99b8640](https://github.com/heroku/heroku-builds/commit/99b864089988d9f0572c9ea21f49f69738248e7e))
+* bump actions/create-github-app-token from 2 to 3 ([#247](https://github.com/heroku/heroku-builds/issues/247)) ([80bc697](https://github.com/heroku/heroku-builds/commit/80bc697a9caadd0fd3612e8e3b25fffbbf763505))
+* bump actions/setup-node from 6 to 7 ([#278](https://github.com/heroku/heroku-builds/issues/278)) ([b72a72d](https://github.com/heroku/heroku-builds/commit/b72a72dbf8a4ff97da2959fc648188f3cb6ba62a))
+* bump brace-expansion ([#283](https://github.com/heroku/heroku-builds/issues/283)) ([c5de098](https://github.com/heroku/heroku-builds/commit/c5de09883d7b5c958c64894f3c1bc8d461ae2866))
+* bump js-yaml and @oclif/plugin-plugins ([#285](https://github.com/heroku/heroku-builds/issues/285)) ([4fe3bf1](https://github.com/heroku/heroku-builds/commit/4fe3bf1fa8545f53ee59a088e4ccbfc7fbae622b))
+* bump tar and @types/tar ([#266](https://github.com/heroku/heroku-builds/issues/266)) ([0265964](https://github.com/heroku/heroku-builds/commit/026596493b0f0cf96bb515aed44bddf69e3aec22))
+* bump tar from 7.5.11 to 7.5.21 ([#281](https://github.com/heroku/heroku-builds/issues/281)) ([1106c75](https://github.com/heroku/heroku-builds/commit/1106c7500f40b48a0835e0bddf40c66756abd703))
+
 ## [2.0.1](https://github.com/heroku/heroku-builds/compare/v2.0.0...v2.0.1) (2026-07-22)
 
 
