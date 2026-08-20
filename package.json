@@ -54,7 +54,7 @@
     "c8": "^10.1.3",
     "chai": "^6.2.2",
     "eslint": "^9",
-    "eslint-plugin-mocha": "^11.2.0",
+    "eslint-plugin-mocha": "^12.0.2",
     "mocha": "^11",
     "nock": "^14",
     "oclif": "4.23.30",
