@@ -1,6 +1,6 @@
 {
   "require": ["tsx", "test/helpers/init.mjs"],
-  "watch-extensions": ["ts"],
+  "watch-files": ["test/**/*.ts", "src/**/*.ts"],
   "recursive": true,
   "reporter": "spec",
   "timeout": 360000,
