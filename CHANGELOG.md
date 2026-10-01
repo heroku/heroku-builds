@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.4](https://github.com/heroku/heroku-builds/compare/v2.0.3...v2.0.4) (2026-10-01)
+
+
+### Dependencies
+
+* bump @oclif/core from 4.13.3 to 4.14.0 ([#302](https://github.com/heroku/heroku-builds/issues/302)) ([3897911](https://github.com/heroku/heroku-builds/commit/3897911312ed7f59c6f15b97dc2cae3c46c77e87))
+* bump brace-expansion ([#306](https://github.com/heroku/heroku-builds/issues/306)) ([c3944b4](https://github.com/heroku/heroku-builds/commit/c3944b4fbaa37cfba82caa0d8a36afdc6b8adf48))
+
 ## [2.0.3](https://github.com/heroku/heroku-builds/compare/v2.0.2...v2.0.3) (2026-09-22)
 
 
