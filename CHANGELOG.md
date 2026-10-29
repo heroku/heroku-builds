@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.5](https://github.com/heroku/heroku-builds/compare/v2.0.4...v2.0.5) (2026-10-29)
+
+
+### Dependencies
+
+* bump @heroku/heroku-cli-util from 10.10.0 to 10.10.1 ([#308](https://github.com/heroku/heroku-builds/issues/308)) ([19790d2](https://github.com/heroku/heroku-builds/commit/19790d276fd98242ee9adf25ede5fded6849489f))
+* bump @heroku/heroku-cli-util from 10.10.1 to 10.10.2 ([#311](https://github.com/heroku/heroku-builds/issues/311)) ([ae99116](https://github.com/heroku/heroku-builds/commit/ae99116700fc4db761ae30aa97419cd840b9cf31))
+
 ## [2.0.4](https://github.com/heroku/heroku-builds/compare/v2.0.3...v2.0.4) (2026-10-01)
 
 
