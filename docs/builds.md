@@ -32,7 +32,7 @@ DESCRIPTION
   List builds for a Heroku app
 ```
 
-_See code: [src/commands/builds/index.ts](https://github.com/heroku/heroku-builds/blob/v2.0.4/src/commands/builds/index.ts)_
+_See code: [src/commands/builds/index.ts](https://github.com/heroku/heroku-builds/blob/v2.0.5/src/commands/builds/index.ts)_
 
 ## `heroku builds:cache:purge`
 
@@ -54,7 +54,7 @@ DESCRIPTION
   purge the build cache for the specified app
 ```
 
-_See code: [src/commands/builds/cache/purge.ts](https://github.com/heroku/heroku-builds/blob/v2.0.4/src/commands/builds/cache/purge.ts)_
+_See code: [src/commands/builds/cache/purge.ts](https://github.com/heroku/heroku-builds/blob/v2.0.5/src/commands/builds/cache/purge.ts)_
 
 ## `heroku builds:cancel [BUILD]`
 
@@ -75,7 +75,7 @@ DESCRIPTION
   Stops executing a running build. Omit BUILD to cancel the latest build.
 ```
 
-_See code: [src/commands/builds/cancel.ts](https://github.com/heroku/heroku-builds/blob/v2.0.4/src/commands/builds/cancel.ts)_
+_See code: [src/commands/builds/cancel.ts](https://github.com/heroku/heroku-builds/blob/v2.0.5/src/commands/builds/cancel.ts)_
 
 ## `heroku builds:create`
 
@@ -104,7 +104,7 @@ DESCRIPTION
   Create build from contents of current dir
 ```
 
-_See code: [src/commands/builds/create.ts](https://github.com/heroku/heroku-builds/blob/v2.0.4/src/commands/builds/create.ts)_
+_See code: [src/commands/builds/create.ts](https://github.com/heroku/heroku-builds/blob/v2.0.5/src/commands/builds/create.ts)_
 
 ## `heroku builds:info [BUILD]`
 
@@ -126,7 +126,7 @@ DESCRIPTION
   view detailed information for a build
 ```
 
-_See code: [src/commands/builds/info.ts](https://github.com/heroku/heroku-builds/blob/v2.0.4/src/commands/builds/info.ts)_
+_See code: [src/commands/builds/info.ts](https://github.com/heroku/heroku-builds/blob/v2.0.5/src/commands/builds/info.ts)_
 
 ## `heroku builds:output [BUILD]`
 
@@ -148,4 +148,4 @@ DESCRIPTION
   Show build output for a Heroku app. Omit BUILD to get the output for the latest build.
 ```
 
-_See code: [src/commands/builds/output.ts](https://github.com/heroku/heroku-builds/blob/v2.0.4/src/commands/builds/output.ts)_
+_See code: [src/commands/builds/output.ts](https://github.com/heroku/heroku-builds/blob/v2.0.5/src/commands/builds/output.ts)_
